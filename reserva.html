@@ -105,8 +105,7 @@ Horário: ${horario}`;
 
 let numero = localStorage.getItem("numeroAcompanhante");
 
-let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
-
+let numero = localStorage.getItem("numeroAcompanhante") || "351931714823";
 window.open(url, "_blank");
 
 }
