@@ -88,7 +88,27 @@ PrivateLux
 <label>Horário</label>
 <input type="text">
 
-<button>Confirmar reserva</button>
+<button onclick="enviarWhatsApp()">Confirmar reserva</button>
+
+<script>
+function enviarWhatsApp(){
+
+let nome = document.querySelector("input[name='nome']").value;
+let endereco = document.querySelector("input[name='endereco']").value;
+let horario = document.querySelector("input[name='horario']").value;
+
+let mensagem = `Olá, gostaria de reservar um atendimento.
+
+Nome: ${nome}
+Endereço: ${endereco}
+Horário: ${horario}`;
+
+let url = "https://wa.me/351931714823?text=" + encodeURIComponent(mensagem);
+
+window.open(url, "_blank");
+
+}
+</script>
 
 </div>
 
