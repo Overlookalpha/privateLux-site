@@ -9,31 +9,14 @@ body{
 margin:0;
 font-family:Arial;
 color:#F2F2F2;
-overflow:hidden;
-}
 
-/* VIDEO DE FUNDO */
+background-image:
+linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+url("https://images.unsplash.com/photo-1517841905240-472988babdf9");
 
-#bg-video{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-}
-
-/* CAMADA ESCURA SOBRE O VIDEO */
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.65);
-z-index:-1;
+background-size:cover;
+background-position:center;
+height:100vh;
 }
 
 /* MENU */
@@ -83,19 +66,15 @@ font-size:18px;
 cursor:pointer;
 }
 
+button:hover{
+background:#d4b45a;
+}
+
 </style>
 
 </head>
 
 <body>
-
-<!-- VIDEO FUNDO -->
-
-<video autoplay muted loop id="bg-video">
-<source src="https://cdn.coverr.co/videos/coverr-a-woman-dancing-under-neon-light-9171/1080p.mp4" type="video/mp4">
-</video>
-
-<div class="overlay"></div>
 
 <div class="menu">
 
