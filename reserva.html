@@ -103,7 +103,9 @@ Nome: ${nome}
 Endereço: ${endereco}
 Horário: ${horario}`;
 
-let url = "https://wa.me/351931714823?text=" + encodeURIComponent(mensagem);
+let numero = localStorage.getItem("numeroAcompanhante");
+
+let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
 
 window.open(url, "_blank");
 
