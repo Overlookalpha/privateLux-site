@@ -12,9 +12,12 @@ background:#0f0f0f;
 color:white;
 }
 
+/* MENU */
+
 .menu{
 display:flex;
 justify-content:space-between;
+align-items:center;
 padding:20px;
 background:#121212;
 }
@@ -31,12 +34,18 @@ margin-left:20px;
 text-decoration:none;
 }
 
+/* CONTAINER PRINCIPAL */
+
 .container{
 display:flex;
 flex-wrap:wrap;
 padding:40px;
 gap:40px;
+max-width:1100px;
+margin:auto;
 }
+
+/* GALERIA DE FOTOS */
 
 .foto{
 flex:1;
@@ -48,6 +57,8 @@ width:100%;
 border-radius:8px;
 }
 
+/* INFORMAÇÕES */
+
 .info{
 flex:1;
 min-width:300px;
@@ -55,14 +66,17 @@ min-width:300px;
 
 .nome{
 color:#C9A24A;
-font-size:36px;
-margin-bottom:10px;
+font-size:42px;
+margin-bottom:5px;
 }
 
 .cidade{
 font-size:18px;
+color:#aaa;
 margin-bottom:20px;
 }
+
+/* BOTÃO */
 
 .botao{
 background:#C9A24A;
@@ -70,6 +84,11 @@ border:none;
 padding:15px 30px;
 font-size:18px;
 cursor:pointer;
+border-radius:5px;
+}
+
+.botao:hover{
+background:#d4b45a;
 }
 
 </style>
@@ -108,8 +127,8 @@ Lisboa
 </div>
 
 <p>
-Acompanhante exclusiva, elegante e discreta.
-Disponível para encontros privados e jantares.
+Acompanhante elegante e discreta.  
+Disponível para encontros privados, jantares e momentos exclusivos.
 </p>
 
 <br>
@@ -121,6 +140,7 @@ Reservar
 </div>
 
 </div>
+
 <script>
 
 function irReserva(numero,nome){
@@ -133,5 +153,6 @@ window.location.href="reserva.html";
 }
 
 </script>
+
 </body>
 </html>
