@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Questionário - PrivateLux</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+padding:40px;
+}
+
+h1{
+color:#C9A24A;
+}
+
+select,button{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:20px;
+border:none;
+border-radius:5px;
+}
+
+button{
+background:#C9A24A;
+cursor:pointer;
+font-size:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Antes de continuar</h1>
+
+<label>Em qual cidade você está?</label>
+<select id="cidade">
+<option>Lisboa</option>
+<option>Setúbal</option>
+<option>Almada</option>
+<option>Outra</option>
+</select>
+
+<label>Tipo de atendimento</label>
+<select id="tipo">
+<option>Atendimento local</option>
+<option>Deslocamento até mim</option>
+</select>
+
+<label>Quando deseja o atendimento?</label>
+<select id="tempo">
+<option>Agora</option>
+<option>Hoje mais tarde</option>
+<option>Agendar outro dia</option>
+</select>
+
+<button onclick="continuar()">Continuar</button>
+
+</div>
+
+<script>
+
+function continuar(){
+
+let cidade = document.getElementById("cidade").value;
+let tipo = document.getElementById("tipo").value;
+let tempo = document.getElementById("tempo").value;
+
+localStorage.setItem("cidadeCliente",cidade);
+localStorage.setItem("tipoAtendimento",tipo);
+localStorage.setItem("tempoAtendimento",tempo);
+
+window.location.href="perfil.html";
+
+}
+
+</script>
+
+</body>
+</html>
