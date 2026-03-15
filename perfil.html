@@ -5,13 +5,6 @@
 
 <style>
 
-.foto-principal img{
-width:100%;
-height:450px;
-object-fit:cover;
-border-radius:10px;
-}
-  
 body{
 margin:0;
 font-family:Arial;
@@ -24,7 +17,6 @@ color:white;
 .menu{
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:20px;
 background:#121212;
 }
@@ -35,52 +27,51 @@ font-size:24px;
 font-weight:bold;
 }
 
-.links a{
-color:white;
-margin-left:20px;
-text-decoration:none;
-}
-
-/* CONTAINER PRINCIPAL */
+/* CONTAINER */
 
 .container{
-display:flex;
-flex-wrap:wrap;
-padding:40px;
-gap:40px;
-max-width:1100px;
+max-width:900px;
 margin:auto;
+padding:40px;
 }
 
-/* GALERIA DE FOTOS */
+/* FOTO PRINCIPAL */
 
-.foto{
-flex:1;
-min-width:300px;
-}
-
-.foto img{
+.foto-principal img{
 width:100%;
-border-radius:8px;
+height:450px;
+object-fit:cover;
+border-radius:10px;
 }
 
-/* INFORMAÇÕES */
+/* GALERIA */
 
-.info{
-flex:1;
-min-width:300px;
+.galeria{
+display:flex;
+gap:10px;
+margin-top:15px;
 }
+
+.galeria img{
+width:100px;
+height:100px;
+object-fit:cover;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* INFO */
 
 .nome{
+font-size:36px;
 color:#C9A24A;
-font-size:42px;
-margin-bottom:5px;
+margin-top:30px;
 }
 
 .cidade{
 font-size:18px;
-color:#aaa;
 margin-bottom:20px;
+color:#aaa;
 }
 
 /* BOTÃO */
@@ -91,60 +82,51 @@ border:none;
 padding:15px 30px;
 font-size:18px;
 cursor:pointer;
-border-radius:5px;
-}
-
-.botao:hover{
-background:#d4b45a;
+margin-top:20px;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="menu">
-
-<div class="logo">
-PrivateLux
-</div>
-
-<div class="links">
-<a href="index.html">Home</a>
-<a href="acompanhantes.html">Acompanhantes</a>
-</div>
-
+<div class="logo">PrivateLux</div>
 </div>
 
 <div class="container">
+
+<!-- FOTO GRANDE -->
 
 <div class="foto-principal">
 <img src="anna.jpg">
 </div>
 
-<div class="info">
+<!-- GALERIA -->
 
-<div class="nome">
-Anna
+<div class="galeria">
+
+<img src="anna.jpg">
+<img src="anna.jpg">
+<img src="anna.jpg">
+<img src="anna.jpg">
+
 </div>
 
-<div class="cidade">
-Lisboa
-</div>
+<!-- INFORMAÇÕES -->
+
+<div class="nome">Anna</div>
+
+<div class="cidade">Lisboa</div>
 
 <p>
-Acompanhante elegante e discreta.  
-Disponível para encontros privados, jantares e momentos exclusivos.
+Acompanhante exclusiva, elegante e discreta.
+Disponível para encontros privados e jantares.
 </p>
-
-<br>
 
 <button class="botao" onclick="irReserva('351931714823','Anna')">
 Reservar
 </button>
-
-</div>
 
 </div>
 
