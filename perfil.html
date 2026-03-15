@@ -114,15 +114,24 @@ Disponível para encontros privados e jantares.
 
 <br>
 
-<a href="reserva.html">
-<button class="botao">
+<button class="botao" onclick="irReserva('351931714823','Anna')">
 Reservar
 </button>
-</a>
 
 </div>
 
 </div>
+<script>
 
+function irReserva(numero,nome){
+
+localStorage.setItem("numeroAcompanhante",numero);
+localStorage.setItem("nomeAcompanhante",nome);
+
+window.location.href="reserva.html";
+
+}
+
+</script>
 </body>
 </html>
