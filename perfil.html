@@ -99,17 +99,17 @@ margin-top:20px;
 <!-- FOTO GRANDE -->
 
 <div class="foto-principal">
-<img src="anna.jpg">
+<img id="fotoGrande" src="anna.jpg">
 </div>
 
 <!-- GALERIA -->
 
 <div class="galeria">
 
-<img src="anna.jpg">
-<img src="anna.jpg">
-<img src="anna.jpg">
-<img src="anna.jpg">
+<img src="anna.jpg" onclick="trocarFoto(this)">
+<img src="anna.jpg" onclick="trocarFoto(this)">
+<img src="anna.jpg" onclick="trocarFoto(this)">
+<img src="anna.jpg" onclick="trocarFoto(this)">
 
 </div>
 
@@ -129,7 +129,15 @@ Reservar
 </button>
 
 </div>
+<script>
 
+function trocarFoto(img){
+
+document.getElementById("fotoGrande").src = img.src;
+
+}
+
+</script>
 <script>
 
 function irReserva(numero,nome){
