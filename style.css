@@ -23,6 +23,10 @@ padding:20px;
 background:rgba(18,18,18,0.8);
 }
 
+.semMenu .menu{
+display:none;
+}
+
 .logo{
 color:#C9A24A;
 font-size:24px;
