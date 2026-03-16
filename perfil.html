@@ -179,23 +179,22 @@ localStorage.setItem("nomeAcompanhante",nome);
 window.location.href="reserva.html";
 
 }
+window.addEventListener("load", function(){
+
 let fotos = [
 "anna.jpg",
-"anna.jpg",
-"anna.jpg",
+"fundo.webp",
+"ima.webp",
 "anna.jpg"
 ];
 
 let fotoAtual = 0;
-
 let startX = 0;
 
 let fotoGrande = document.getElementById("fotoGrande");
 
 fotoGrande.addEventListener("touchstart", function(e){
-
 startX = e.touches[0].clientX;
-
 });
 
 fotoGrande.addEventListener("touchend", function(e){
@@ -225,6 +224,8 @@ fotoAtual = fotos.length - 1;
 fotoGrande.src = fotos[fotoAtual];
 
 }
+
+});
 
 });
 </script>
