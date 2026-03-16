@@ -47,12 +47,42 @@ font-size:16px;
 <h1>Antes de continuar</h1>
 
 <label>Em qual cidade você está?</label>
-<select id="cidade">
-<option>Lisboa</option>
-<option>Setúbal</option>
-<option>Almada</option>
-<option>Outra</option>
-</select>
+
+<div id="cidadeDetectada" style="display:none; margin-bottom:15px;">
+
+Detectamos que você está em  
+<strong id="cidadeNome"></strong>
+
+<br><br>
+
+<button type="button" onclick="confirmarCidade()">Confirmar cidade</button>
+
+</div>
+
+<input list="cidades" id="cidade" placeholder="Digite sua cidade">
+
+<datalist id="cidades">
+
+<option value="Lisboa">
+<option value="Amadora">
+<option value="Oeiras">
+<option value="Cascais">
+<option value="Sintra">
+<option value="Loures">
+
+<option value="Setúbal">
+<option value="Almada">
+<option value="Montijo">
+<option value="Moita">
+<option value="Barreiro">
+<option value="Palmela">
+
+<option value="Porto">
+<option value="Braga">
+<option value="Coimbra">
+<option value="Faro">
+
+</datalist>
 
 <label>Tipo de atendimento</label>
 <select id="tipo">
@@ -88,6 +118,41 @@ window.location.href="perfil.html";
 }
 
 </script>
+<script>
 
+let cidadeAuto = "";
+
+// DETECTAR CIDADE PELO IP
+fetch("https://ipapi.co/json/")
+.then(response => response.json())
+.then(data => {
+
+cidadeAuto = data.city;
+
+if(cidadeAuto){
+
+// MOSTRAR NOME DA CIDADE
+document.getElementById("cidadeNome").innerText = cidadeAuto;
+
+// MOSTRAR A CAIXA
+document.getElementById("cidadeDetectada").style.display = "block";
+
+}
+
+})
+.catch(error => {
+
+console.log("Não foi possível detectar a cidade");
+
+});
+
+// FUNÇÃO DO BOTÃO "CONFIRMAR CIDADE"
+function confirmarCidade(){
+
+document.getElementById("cidade").value = cidadeAuto;
+
+}
+
+</script>
 </body>
 </html>
