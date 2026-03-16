@@ -200,12 +200,16 @@ right:30px;
 </div>
 
 <div id="lightbox" onclick="fecharFoto()">
-  
+
+<div onclick="event.stopPropagation()">
+
 <span class="seta esquerda" onclick="fotoAnterior()">❮</span>
 
-<img id="fotoZoom" onclick="event.stopPropagation()">
-  
+<img id="fotoZoom">
+
 <span class="seta direita" onclick="proximaFoto()">❯</span>
+
+</div>
 
 </div>
   
@@ -261,8 +265,10 @@ if(fotoAtual >= fotosGaleria.length){
 fotoAtual = 0;
 }
 
-document.getElementById("fotoZoom").src = fotosGaleria[fotoAtual].src;
-document.getElementById("fotoGrande").src = fotosGaleria[fotoAtual].src;
+let novaFoto = fotosGaleria[fotoAtual].src;
+
+document.getElementById("fotoZoom").src = novaFoto;
+document.getElementById("fotoGrande").src = novaFoto;
 
 }
 
@@ -274,8 +280,10 @@ if(fotoAtual < 0){
 fotoAtual = fotosGaleria.length - 1;
 }
 
-document.getElementById("fotoZoom").src = fotosGaleria[fotoAtual].src;
-document.getElementById("fotoGrande").src = fotosGaleria[fotoAtual].src;
+let novaFoto = fotosGaleria[fotoAtual].src;
+
+document.getElementById("fotoZoom").src = novaFoto;
+document.getElementById("fotoGrande").src = novaFoto;
 
 }
 function irReserva(numero,nome){
