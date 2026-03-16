@@ -234,8 +234,10 @@ function trocarFoto(img){
 
 let lightbox = document.getElementById("lightbox");
 let fotoZoom = document.getElementById("fotoZoom");
+let fotoGrande = document.getElementById("fotoGrande");
 
 fotoZoom.src = img.src;
+fotoGrande.src = img.src;
 
 fotosGaleria.forEach((foto,index)=>{
 if(foto.src === img.src){
@@ -256,10 +258,11 @@ function proximaFoto(){
 fotoAtual++;
 
 if(fotoAtual >= fotosGaleria.length){
-fotoAtual = fotosGaleria.length - 1;
+fotoAtual = 0;
 }
 
 document.getElementById("fotoZoom").src = fotosGaleria[fotoAtual].src;
+document.getElementById("fotoGrande").src = fotosGaleria[fotoAtual].src;
 
 }
 
@@ -268,13 +271,13 @@ function fotoAnterior(){
 fotoAtual--;
 
 if(fotoAtual < 0){
-fotoAtual = 0;
+fotoAtual = fotosGaleria.length - 1;
 }
 
 document.getElementById("fotoZoom").src = fotosGaleria[fotoAtual].src;
+document.getElementById("fotoGrande").src = fotosGaleria[fotoAtual].src;
 
 }
-
 function irReserva(numero,nome){
 
 localStorage.setItem("numeroAcompanhante",numero);
