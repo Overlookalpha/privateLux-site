@@ -227,22 +227,54 @@ Reservar
 </div>
 <script>
 
-function trocarFoto(img){
+let fotosGaleria = document.querySelectorAll(".galeria img");
+let fotoAtual = 0;
 
-document.getElementById("fotoGrande").src = img.src;
+function trocarFoto(img){
 
 let lightbox = document.getElementById("lightbox");
 let fotoZoom = document.getElementById("fotoZoom");
 
 fotoZoom.src = img.src;
+
+fotosGaleria.forEach((foto,index)=>{
+if(foto.src === img.src){
+fotoAtual = index;
+}
+});
+
 lightbox.style.display = "flex";
 
 }
-function fecharFoto(){
 
+function fecharFoto(){
 document.getElementById("lightbox").style.display = "none";
+}
+
+function proximaFoto(){
+
+fotoAtual++;
+
+if(fotoAtual >= fotosGaleria.length){
+fotoAtual = fotosGaleria.length - 1;
+}
+
+document.getElementById("fotoZoom").src = fotosGaleria[fotoAtual].src;
 
 }
+
+function fotoAnterior(){
+
+fotoAtual--;
+
+if(fotoAtual < 0){
+fotoAtual = 0;
+}
+
+document.getElementById("fotoZoom").src = fotosGaleria[fotoAtual].src;
+
+}
+
 function irReserva(numero,nome){
 
 localStorage.setItem("numeroAcompanhante",numero);
@@ -251,123 +283,6 @@ localStorage.setItem("nomeAcompanhante",nome);
 window.location.href="reserva.html";
 
 }
-window.addEventListener("load", function(){
-
-let fotoGrande = document.getElementById("fotoGrande");
-let startX = 0;
-
-fotoGrande.addEventListener("touchstart", function(e){
-startX = e.touches[0].clientX;
-});
-
-fotoGrande.addEventListener("touchend", function(e){
-
-let endX = e.changedTouches[0].clientX;
-let distancia = endX - startX;
-
-if(distancia < -50){
-proximaFoto();
-}
-
-if(distancia > 50){
-fotoAnterior();
-}
-
-});
-
-function proximaFoto(){
-
-let atual = fotoGrande.src;
-
-let lista = [
-"anna.jpg",
-"fundo.webp",
-"ima.webp"
-];
-
-let index = lista.findIndex(f => atual.includes(f));
-
-index++;
-
-if(index >= lista.length){
-index = 0;
-}
-
-fotoGrande.src = lista[index];
-
-}
-
-function fotoAnterior(){
-
-let atual = fotoGrande.src;
-
-let lista = [
-"anna.jpg",
-"fundo.webp",
-"ima.webp"
-];
-
-let index = lista.findIndex(f => atual.includes(f));
-
-index--;
-
-if(index < 0){
-index = lista.length - 1;
-}
-
-fotoGrande.src = lista[index];
-
-}
-
-});
-  let fotos = [
-"anna.jpg",
-"fundo.webp",
-"ima.webp"
-];
-
-let fotoAtual = 0;
-
-function atualizarSetas(){
-
-let esquerda = document.getElementById("setaEsquerda");
-let direita = document.getElementById("setaDireita");
-
-if(fotoAtual === 0){
-esquerda.style.display = "none";
-}else{
-esquerda.style.display = "block";
-}
-
-if(fotoAtual === fotos.length - 1){
-direita.style.display = "none";
-}else{
-direita.style.display = "block";
-}
-
-}
-
-function proximaFoto(){
-
-fotoAtual++;
-
-document.getElementById("fotoGrande").src = fotos[fotoAtual];
-
-atualizarSetas();
-
-}
-
-function fotoAnterior(){
-
-fotoAtual--;
-
-document.getElementById("fotoGrande").src = fotos[fotoAtual];
-
-atualizarSetas();
-
-}
-
-window.onload = atualizarSetas;
 </script>
 
 </body>
