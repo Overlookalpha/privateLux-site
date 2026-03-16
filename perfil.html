@@ -181,17 +181,8 @@ window.location.href="reserva.html";
 }
 window.addEventListener("load", function(){
 
-let fotos = [
-"anna.jpg",
-"fundo.webp",
-"ima.webp",
-"anna.jpg"
-];
-
-let fotoAtual = 0;
-let startX = 0;
-
 let fotoGrande = document.getElementById("fotoGrande");
+let startX = 0;
 
 fotoGrande.addEventListener("touchstart", function(e){
 startX = e.touches[0].clientX;
@@ -200,32 +191,61 @@ startX = e.touches[0].clientX;
 fotoGrande.addEventListener("touchend", function(e){
 
 let endX = e.changedTouches[0].clientX;
+let distancia = endX - startX;
 
-if(endX < startX - 50){
-
-fotoAtual++;
-
-if(fotoAtual >= fotos.length){
-fotoAtual = 0;
+if(distancia < -50){
+proximaFoto();
 }
 
-fotoGrande.src = fotos[fotoAtual];
-
-}
-
-if(endX > startX + 50){
-
-fotoAtual--;
-
-if(fotoAtual < 0){
-fotoAtual = fotos.length - 1;
-}
-
-fotoGrande.src = fotos[fotoAtual];
-
+if(distancia > 50){
+fotoAnterior();
 }
 
 });
+
+function proximaFoto(){
+
+let atual = fotoGrande.src;
+
+let lista = [
+"anna.jpg",
+"fundo.webp",
+"ima.webp"
+];
+
+let index = lista.findIndex(f => atual.includes(f));
+
+index++;
+
+if(index >= lista.length){
+index = 0;
+}
+
+fotoGrande.src = lista[index];
+
+}
+
+function fotoAnterior(){
+
+let atual = fotoGrande.src;
+
+let lista = [
+"anna.jpg",
+"fundo.webp",
+"ima.webp"
+];
+
+let index = lista.findIndex(f => atual.includes(f));
+
+index--;
+
+if(index < 0){
+index = lista.length - 1;
+}
+
+fotoGrande.src = lista[index];
+
+}
 
 });
 </script>
