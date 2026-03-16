@@ -171,9 +171,6 @@ function fecharFoto(){
 document.getElementById("lightbox").style.display = "none";
 
 }
-</script>
-<script>
-
 function irReserva(numero,nome){
 
 localStorage.setItem("numeroAcompanhante",numero);
@@ -182,7 +179,54 @@ localStorage.setItem("nomeAcompanhante",nome);
 window.location.href="reserva.html";
 
 }
+let fotos = [
+"anna.jpg",
+"anna.jpg",
+"anna.jpg",
+"anna.jpg"
+];
 
+let fotoAtual = 0;
+
+let startX = 0;
+
+let fotoGrande = document.getElementById("fotoGrande");
+
+fotoGrande.addEventListener("touchstart", function(e){
+
+startX = e.touches[0].clientX;
+
+});
+
+fotoGrande.addEventListener("touchend", function(e){
+
+let endX = e.changedTouches[0].clientX;
+
+if(endX < startX - 50){
+
+fotoAtual++;
+
+if(fotoAtual >= fotos.length){
+fotoAtual = 0;
+}
+
+fotoGrande.src = fotos[fotoAtual];
+
+}
+
+if(endX > startX + 50){
+
+fotoAtual--;
+
+if(fotoAtual < 0){
+fotoAtual = fotos.length - 1;
+}
+
+fotoGrande.src = fotos[fotoAtual];
+
+}
+
+});
 </script>
 
 </body>
