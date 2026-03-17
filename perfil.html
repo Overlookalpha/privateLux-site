@@ -228,7 +228,7 @@ Seu navegador não suporta vídeo.
 
 <div class="nome">Anna</div>
 
-<div class="cidade">Lisboa</div>
+<div class="cidade" id="cidadePerfil">Lisboa</div>
 
 <div class="descricao">
 
@@ -263,8 +263,8 @@ Reservar
 </div>
 <script>
 
-let fotosGaleria = document.querySelectorAll(".galeria img");
-let fotoAtual = 0;
+fotosGaleria = document.querySelectorAll(".galeria img");
+fotoAtual = 0;
 
 function trocarFoto(img){
 
@@ -320,8 +320,11 @@ document.getElementById("fotoGrande").src = novaFoto;
 }
 function irReserva(numero,nome){
 
+let cidade = document.getElementById("cidadePerfil").innerText;
+
 localStorage.setItem("numeroAcompanhante",numero);
 localStorage.setItem("nomeAcompanhante",nome);
+localStorage.setItem("cidadeAcompanhante",cidade);
 
 window.location.href="reserva.html";
 
