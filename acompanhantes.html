@@ -81,7 +81,11 @@ PrivateLux
 <div style="height:20px;"></div>
 
 <div style="padding:20px; text-align:center;">
-
+<select id="categoria" style="padding:10px; margin-right:10px;">
+<option value="todas">Todas</option>
+<option value="mulheres">Mulheres</option>
+<option value="homens">Homens</option>
+</select>
 <select id="cidade" style="padding:10px; margin-right:10px;">
 <option value="todas">Todas as cidades</option>
 <option value="lisboa">Lisboa</option>
@@ -100,6 +104,7 @@ Pesquisar
 <img src="anna.jpg">
 <h3>Anna</h3>
 <p>Lisboa</p>
+<p>Mulheres</p>
 </a>
 
 </div>
@@ -107,17 +112,22 @@ Pesquisar
 
 function filtrar(){
 let cidade = document.getElementById("cidade").value;
+let categoria = document.getElementById("categoria").value;
 
 let cards = document.querySelectorAll(".card");
 
 cards.forEach(card => {
 let texto = card.innerText.toLowerCase();
 
-if(cidade === "todas" || texto.includes(cidade)){
+let matchCidade = cidade === "todas" || texto.includes(cidade);
+let matchCategoria = categoria === "todas" || texto.includes(categoria);
+
+if(matchCidade && matchCategoria){
 card.style.display = "block";
 }else{
 card.style.display = "none";
 }
+
 });
 
 }
