@@ -112,31 +112,107 @@ window.open(url, "_blank");
 
 }
 
+const distancias = {
+"Setúbal": {
+"Montijo": 25,
+"Lisboa": 50,
+"Almada": 40,
+"Faro": 220
+}
+};
+
+const coordenadas = {
+"Setúbal": { lat: 38.5244, lng: -8.8882 },
+"Lisboa": { lat: 38.7223, lng: -9.1393 },
+"Sintra": { lat: 38.8029, lng: -9.3817 },
+"Cascais": { lat: 38.6979, lng: -9.4215 },
+"Oeiras": { lat: 38.6970, lng: -9.3017 },
+"Amadora": { lat: 38.7538, lng: -9.2308 },
+"Loures": { lat: 38.8300, lng: -9.1660 },
+
+"Montijo": { lat: 38.7067, lng: -8.9739 },
+"Almada": { lat: 38.6766, lng: -9.1651 },
+"Barreiro": { lat: 38.6600, lng: -9.0733 },
+"Moita": { lat: 38.6500, lng: -8.9900 },
+"Palmela": { lat: 38.5690, lng: -8.9010 },
+"Sesimbra": { lat: 38.4445, lng: -9.1015 },
+"Grândola": { lat: 38.1774, lng: -8.5667 },
+
+"Faro": { lat: 37.0194, lng: -7.9304 },
+"Albufeira": { lat: 37.0891, lng: -8.2479 },
+"Portimão": { lat: 37.1366, lng: -8.5380 },
+"Lagos": { lat: 37.1020, lng: -8.6742 },
+"Vilamoura": { lat: 37.0800, lng: -8.1200 },
+
+"Évora": { lat: 38.5714, lng: -7.9135 },
+"Beja": { lat: 38.0151, lng: -7.8632 },
+
+"Coimbra": { lat: 40.2033, lng: -8.4103 },
+"Aveiro": { lat: 40.6405, lng: -8.6538 },
+"Leiria": { lat: 39.7436, lng: -8.8070 },
+"Figueira da Foz": { lat: 40.1500, lng: -8.8667 },
+
+"Covilhã": { lat: 40.2800, lng: -7.5040 },
+"Guarda": { lat: 40.5373, lng: -7.2677 },
+"Castelo Branco": { lat: 39.8222, lng: -7.4900 },
+"Viseu": { lat: 40.6610, lng: -7.9097 },
+
+"Porto": { lat: 41.1579, lng: -8.6291 },
+"Braga": { lat: 41.5454, lng: -8.4265 },
+"Guimarães": { lat: 41.4444, lng: -8.2962 },
+"Vila Nova de Gaia": { lat: 41.1333, lng: -8.6167 }
+};
+  
+function calcularDistanciaKm(c1, c2){
+
+if(!coordenadas[c1] || !coordenadas[c2]){
+return null;
+}
+
+let lat1 = coordenadas[c1].lat;
+let lon1 = coordenadas[c1].lng;
+let lat2 = coordenadas[c2].lat;
+let lon2 = coordenadas[c2].lng;
+
+let R = 6371; // raio da terra
+
+let dLat = (lat2 - lat1) * Math.PI / 180;
+let dLon = (lon2 - lon1) * Math.PI / 180;
+
+let a =
+Math.sin(dLat/2) * Math.sin(dLat/2) +
+Math.cos(lat1 * Math.PI / 180) *
+Math.cos(lat2 * Math.PI / 180) *
+Math.sin(dLon/2) * Math.sin(dLon/2);
+
+let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+let distancia = R * c;
+
+return distancia;
+
+}
+  
 function calcularDeslocamento(cliente, acompanhante){
 
+// mesma cidade
 if(cliente === acompanhante){
 return 10;
 }
 
-if(cliente === "Montijo" && acompanhante === "Setúbal"){
-return 15;
+// calcular distância real
+let distancia = calcularDistanciaKm(cliente, acompanhante);
+
+if(distancia){
+
+return Math.round(distancia * 0.5); // 0.5€ por km
+
 }
 
-if(cliente === "Setúbal" && acompanhante === "Montijo"){
-return 15;
-}
-
+// fallback
 return 20;
 
-}  
-
-let cidadeCliente = localStorage.getItem("cidadeCliente");
-let cidadeAcompanhante = "Setúbal"; // depois vai ser dinâmico
-
-let valor = calcularDeslocamento(cidadeCliente, cidadeAcompanhante);
-
-document.getElementById("taxaDeslocamento").innerText =
-"Taxa de deslocamento: " + valor + "€";
+}
 </script>
 
 </div>
