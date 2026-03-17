@@ -80,6 +80,20 @@ PrivateLux
 
 <div style="height:20px;"></div>
 
+<div style="padding:20px; text-align:center;">
+
+<select id="cidade" style="padding:10px; margin-right:10px;">
+<option value="todas">Todas as cidades</option>
+<option value="lisboa">Lisboa</option>
+<option value="porto">Porto</option>
+</select>
+
+<button onclick="filtrar()" style="padding:10px 20px; background:#C9A24A; border:none;">
+Pesquisar
+</button>
+
+</div>
+
 <div class="container">
 
 <a href="perfil.html" class="card">
@@ -89,6 +103,25 @@ PrivateLux
 </a>
 
 </div>
+<script>
 
+function filtrar(){
+let cidade = document.getElementById("cidade").value;
+
+let cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+let texto = card.innerText.toLowerCase();
+
+if(cidade === "todas" || texto.includes(cidade)){
+card.style.display = "block";
+}else{
+card.style.display = "none";
+}
+});
+
+}
+
+</script>
 </body>
 </html>
