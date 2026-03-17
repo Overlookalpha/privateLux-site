@@ -244,6 +244,26 @@ Ambiente reservado e atendimento profissional.
 
 <div class="informacoes">
 
+<div class="valores">
+
+<h3>Valores</h3>
+
+<p><strong>Local:</strong></p>
+<ul>
+<li>30 min — 60€</li>
+<li>1 hora — 100€</li>
+</ul>
+
+<p><strong>Deslocação:</strong></p>
+<ul>
+<li>30 min — 100€</li>
+<li>1 hora — 150€</li>
+<li>2 horas — 280€</li>
+<li>3 horas — 400€</li>
+</ul>
+
+</div>
+
 <h3>Informações</h3>
 
 <ul class="info-perfil">
@@ -331,6 +351,16 @@ window.location.href="reserva.html";
 }
 </script>
 <script>
+let valores = [
+{nome: "Local - 30min", valor: 60},
+{nome: "Local - 1h", valor: 100},
+{nome: "Deslocação - 30min", valor: 100},
+{nome: "Deslocação - 1h", valor: 150},
+{nome: "Deslocação - 2h", valor: 280},
+{nome: "Deslocação - 3h", valor: 400}
+];
+
+localStorage.setItem("valoresServicos", JSON.stringify(valores));
 
 let video = localStorage.getItem("videoPerfil");
 
