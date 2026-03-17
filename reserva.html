@@ -153,6 +153,16 @@ ${totalTexto}`;
 let numero = localStorage.getItem("numeroAcompanhante") || "351931714823";
 
 let url = "https://web.whatsapp.com/send?phone=" + numero + "&text=" + encodeURIComponent(mensagem);
+salvarReserva({
+  nome,
+  endereco,
+  horario,
+  servico: textoServico,
+  deslocamento: deslocamentoTexto,
+  total: totalTexto,
+  status: "pendente",
+  criadoEm: new Date().toISOString()
+});
 window.open(url, "_blank");
 
 }
@@ -351,6 +361,31 @@ calcularTudo();
 </script>
 
 </div>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD_npgtvRpaEvAdJSsZRTQ-dgDBGefEd0w",
+  authDomain: "privatelux.firebaseapp.com",
+  projectId: "privatelux",
+  storageBucket: "privatelux.firebasestorage.app",
+  messagingSenderId: "54727056404",
+  appId: "1:54727056404:web:d475eab8632633f8c8db01"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.salvarReserva = async function(dados){
+  try{
+    await addDoc(collection(db, "reservas"), dados);
+    console.log("Reserva salva!");
+  }catch(e){
+    console.error("Erro:", e);
+  }
+}
+
+</script>
 </body>
 </html>
