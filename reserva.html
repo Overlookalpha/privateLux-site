@@ -83,6 +83,12 @@ PrivateLux
 <label>Horário</label>
 <input type="text" name="horario">
 
+<div id="taxaDeslocamento" style="margin:15px 0; font-size:18px;">
+
+Taxa de deslocamento: --
+
+</div>
+  
 <button type="button" onclick="enviarWhatsApp()">Confirmar reserva</button>
 
 <script>
@@ -105,7 +111,13 @@ let url = "https://web.whatsapp.com/send?phone=" + numero + "&text=" + encodeURI
 window.open(url, "_blank");
 
 }
+let cidadeCliente = localStorage.getItem("cidadeCliente");
+let cidadeAcompanhante = "Setúbal"; // depois vai ser dinâmico
 
+let valor = calcularDeslocamento(cidadeCliente, cidadeAcompanhante);
+
+document.getElementById("taxaDeslocamento").innerText =
+"Taxa de deslocamento: " + valor + "€";
 </script>
 
 </div>
