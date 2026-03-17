@@ -117,9 +117,7 @@ Total: --
 <script>
 
 let dados = JSON.parse(localStorage.getItem("valoresServicos"));
-
 let select = document.getElementById("servico");
-
 if(dados){
 dados.forEach(item => {
 
@@ -132,7 +130,6 @@ select.appendChild(option);
 });
 }
 
-let select = document.getElementById("servico");
 let valorBase = select.value;
   
 function enviarWhatsApp(){
