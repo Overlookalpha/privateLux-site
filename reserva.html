@@ -72,8 +72,8 @@ PrivateLux
 
 <div class="container">
 
-<h2>Reservar Atendimento</h2>
-
+<h2 id="tituloReserva">Reservar Atendimento</h2>
+  
 <label>Seu nome</label>
 <input type="text" name="nome">
 
@@ -121,6 +121,12 @@ select.appendChild(option);
 }
 
 let valorBase = select.value;
+let nomeAcompanhante = localStorage.getItem("nomeAcompanhante");
+
+if(nomeAcompanhante){
+document.getElementById("tituloReserva").innerText =
+"Reservar com " + nomeAcompanhante;
+}
   
 function enviarWhatsApp(){
 
