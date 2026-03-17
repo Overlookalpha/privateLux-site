@@ -111,6 +111,25 @@ let url = "https://web.whatsapp.com/send?phone=" + numero + "&text=" + encodeURI
 window.open(url, "_blank");
 
 }
+
+function calcularDeslocamento(cliente, acompanhante){
+
+if(cliente === acompanhante){
+return 10;
+}
+
+if(cliente === "Montijo" && acompanhante === "Setúbal"){
+return 15;
+}
+
+if(cliente === "Setúbal" && acompanhante === "Montijo"){
+return 15;
+}
+
+return 20;
+
+}  
+
 let cidadeCliente = localStorage.getItem("cidadeCliente");
 let cidadeAcompanhante = "Setúbal"; // depois vai ser dinâmico
 
