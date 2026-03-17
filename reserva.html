@@ -296,27 +296,30 @@ let coordAcompanhante = await obterCoordenadas(cidadeAcompanhante);
 
 if(coordCliente && coordAcompanhante){
 
-let distancia = calcularDistanciaKmCoord(coordCliente, coordAcompanhante);
-
-let valor = Math.round(distancia * 1);
-
 let select = document.getElementById("servico");
 let valorServico = parseFloat(select.value);
 
+let distancia = calcularDistanciaKmCoord(coordCliente, coordAcompanhante);
+
+let deslocamento = Math.round(distancia * 0.5);
+
+// mesma cidade = 10€
+if(cidadeCliente === cidadeAcompanhante){
+deslocamento = 10;
+}
+
+// mostrar valores
 document.getElementById("valorServico").innerText =
 "Valor do serviço: " + valorServico + "€";
-  
-let total = valorServico + valor;
+
+document.getElementById("taxaDeslocamento").innerText =
+"Taxa de deslocamento: " + deslocamento + "€";
+
+// AGORA SIM soma correto
+let total = valorServico + deslocamento;
 
 document.getElementById("valorTotal").innerText =
 "Total: " + total + "€";
-
-if(cidadeCliente === cidadeAcompanhante){
-valor = 10;
-}
-
-document.getElementById("taxaDeslocamento").innerText =
-"Taxa de deslocamento: " + valor + "€";
 
 }else{
 
