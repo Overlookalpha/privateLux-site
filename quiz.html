@@ -127,19 +127,18 @@ fetch("https://ipapi.co/json/")
 .then(response => response.json())
 .then(data => {
 
-cidadeAuto = data.city;
+cidadeAuto = data.city || "";
 
 // CORRIGIR NOMES
 if(cidadeAuto === "Lisbon"){
 cidadeAuto = "Lisboa";
 }
 
-if(cidadeAuto){
+// MOSTRAR SEMPRE SE TIVER VALOR
+if(cidadeAuto !== ""){
 
-// MOSTRAR NOME DA CIDADE
 document.getElementById("cidadeNome").innerText = cidadeAuto;
 
-// MOSTRAR A CAIXA
 document.getElementById("cidadeDetectada").style.display = "block";
 
 }
@@ -147,10 +146,16 @@ document.getElementById("cidadeDetectada").style.display = "block";
 })
 .catch(error => {
 
-console.log("Não foi possível detectar a cidade");
+console.log("Erro ao detectar cidade");
+
+// TESTE FORÇADO (pra não sumir nunca)
+cidadeAuto = "Lisboa";
+
+document.getElementById("cidadeNome").innerText = cidadeAuto;
+
+document.getElementById("cidadeDetectada").style.display = "block";
 
 });
-
 // FUNÇÃO DO BOTÃO "CONFIRMAR CIDADE"
 function confirmarCidade(){
 
