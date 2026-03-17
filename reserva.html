@@ -88,11 +88,21 @@ PrivateLux
 Taxa de deslocamento: --
 
 </div>
+
+<div id="valorServico" style="margin:10px 0; font-size:18px;">
+Valor do serviço: --
+</div>
+
+<div id="valorTotal" style="margin:10px 0; font-size:20px; color:#C9A24A;">
+Total: --
+</div>
   
 <button type="button" onclick="enviarWhatsApp()">Confirmar reserva</button>
 
 <script>
 
+let valorBase = localStorage.getItem("valorServico") || 100;
+  
 function enviarWhatsApp(){
 
 let nome = document.querySelector("input[name='nome']").value;
@@ -250,6 +260,14 @@ if(coordCliente && coordAcompanhante){
 let distancia = calcularDistanciaKmCoord(coordCliente, coordAcompanhante);
 
 let valor = Math.round(distancia * 1);
+
+document.getElementById("valorServico").innerText =
+"Valor do serviço: " + valorBase + "€";
+
+let total = parseInt(valorBase) + valor;
+
+document.getElementById("valorTotal").innerText =
+"Total: " + total + "€";
 
 if(cidadeCliente === cidadeAcompanhante){
 valor = 10;
