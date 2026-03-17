@@ -83,6 +83,20 @@ PrivateLux
 <label>Horário</label>
 <input type="text" name="horario">
 
+<label>Escolha o serviço</label>
+
+<select id="servico" onchange="calcularTudo()" style="width:100%; padding:10px; margin-bottom:20px; background:#1a1a1a; color:white;">
+
+<option value="60">Local - 30min (60€)</option>
+<option value="100">Local - 1h (100€)</option>
+
+<option value="100">Deslocação - 30min (100€)</option>
+<option value="150">Deslocação - 1h (150€)</option>
+<option value="280">Deslocação - 2h (280€)</option>
+<option value="400">Deslocação - 3h (400€)</option>
+
+</select>
+
 <div id="taxaDeslocamento" style="margin:15px 0; font-size:18px;">
 
 Taxa de deslocamento: --
@@ -101,7 +115,8 @@ Total: --
 
 <script>
 
-let valorBase = localStorage.getItem("valorServico") || 100;
+let select = document.getElementById("servico");
+let valorBase = select.value;
   
 function enviarWhatsApp(){
 
@@ -109,11 +124,21 @@ let nome = document.querySelector("input[name='nome']").value;
 let endereco = document.querySelector("input[name='endereco']").value;
 let horario = document.querySelector("input[name='horario']").value;
 
+let servico = document.getElementById("servico");
+let textoServico = servico.options[servico.selectedIndex].text;
+
+let deslocamentoTexto = document.getElementById("taxaDeslocamento").innerText;
+let totalTexto = document.getElementById("valorTotal").innerText;
+
 let mensagem = `Olá, gostaria de reservar um atendimento.
 
 Nome: ${nome}
 Endereço: ${endereco}
-Horário: ${horario}`;
+Horário: ${horario}
+
+Serviço: ${textoServico}
+${deslocamentoTexto}
+${totalTexto}`;
 
 let numero = localStorage.getItem("numeroAcompanhante") || "351931714823";
 
