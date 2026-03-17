@@ -239,7 +239,7 @@ return 20;
   async function calcularTudo(){
 
 let cidadeCliente = localStorage.getItem("cidadeCliente");
-let cidadeAcompanhante = "Setúbal"; // depois será dinâmico
+let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante") || "Setúbal";
 
 // obter coordenadas
 let coordCliente = await obterCoordenadas(cidadeCliente);
