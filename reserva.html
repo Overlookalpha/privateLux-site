@@ -86,6 +86,7 @@ PrivateLux
 <label>Escolha o serviço</label>
 
 <select id="servico" onchange="calcularTudo()" style="width:100%; padding:10px; margin-bottom:20px; background:#1a1a1a; color:white;">
+</select>
 
 <option value="60">Local - 30min (60€)</option>
 <option value="100">Local - 1h (100€)</option>
@@ -114,6 +115,22 @@ Total: --
 <button type="button" onclick="enviarWhatsApp()">Confirmar reserva</button>
 
 <script>
+
+let dados = JSON.parse(localStorage.getItem("valoresServicos"));
+
+let select = document.getElementById("servico");
+
+if(dados){
+dados.forEach(item => {
+
+let option = document.createElement("option");
+option.value = item.valor;
+option.text = item.nome + " (" + item.valor + "€)";
+
+select.appendChild(option);
+
+});
+}
 
 let select = document.getElementById("servico");
 let valorBase = select.value;
