@@ -204,14 +204,8 @@ right:30px;
 
 <h3>Vídeo</h3>
 
-<video width="100%" controls>
-
-<source src="video.mp4" type="video/mp4">
-<source src="video.webm" type="video/webm">
-<source src="video.ogg" type="video/ogg">
-
+<video id="videoPerfil" width="100%" controls>
 Seu navegador não suporta vídeo.
-
 </video>
 
 </div>
@@ -333,6 +327,15 @@ window.location.href="reserva.html";
 
 }
 </script>
+<script>
 
+let video = localStorage.getItem("videoPerfil");
+
+if(video){
+document.getElementById("videoPerfil").innerHTML =
+'<source src="' + video + '" type="video/mp4">';
+}
+
+</script>
 </body>
 </html>
