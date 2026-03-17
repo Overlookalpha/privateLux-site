@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Painel - PrivateLux</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f0f0f;
+  color:white;
+}
+
+.container{
+  padding:20px;
+}
+
+.card{
+  background:#1a1a1a;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:10px;
+}
+
+button{
+  background:#C9A24A;
+  border:none;
+  padding:10px;
+  width:100%;
+  margin-top:10px;
+  cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Reservas</h2>
+
+<div id="listaReservas"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD_npgtvRpaEvAdJSsZRTQ-dgDBGefEd0w",
+  authDomain: "privatelux.firebaseapp.com",
+  projectId: "privatelux",
+  storageBucket: "privatelux.firebasestorage.app",
+  messagingSenderId: "54727056404",
+  appId: "1:54727056404:web:d475eab8632633f8c8db01"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const lista = document.getElementById("listaReservas");
+
+onSnapshot(collection(db, "reservas"), (snapshot) => {
+
+  lista.innerHTML = "";
+
+  snapshot.forEach(doc => {
+
+    let r = doc.data();
+
+    let div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <b>${r.nome}</b><br>
+      📍 ${r.endereco}<br>
+      ⏰ ${r.horario}<br>
+      ${r.servico}<br>
+      ${r.total}<br>
+
+      <button onclick="iniciar('${doc.id}')">
+        🚗 Iniciar deslocamento
+      </button>
+    `;
+
+    lista.appendChild(div);
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
