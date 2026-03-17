@@ -304,9 +304,12 @@ let distancia = calcularDistanciaKmCoord(coordCliente, coordAcompanhante);
 let valor = Math.round(distancia * 1);
 
 document.getElementById("valorServico").innerText =
-"Valor do serviço: " + valorBase + "€";
+"Valor do serviço: " + valorServico + "€";
 
-let total = parseInt(valorBase) + valor;
+let select = document.getElementById("servico");
+let valorServico = parseFloat(select.value);
+
+let total = valorServico + valor;
 
 document.getElementById("valorTotal").innerText =
 "Total: " + total + "€";
