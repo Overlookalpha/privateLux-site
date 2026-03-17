@@ -197,7 +197,7 @@ async function obterCoordenadas(cidade){
 
 try{
 
-let resposta = await fetch(https://nominatim.openstreetmap.org/search?format=json&q=${cidade},Portugal);
+let resposta = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${cidade},Portugal`);
 
 let dados = await resposta.json();
 
@@ -236,6 +236,59 @@ return Math.round(distancia * 0.5); // 0.5€ por km
 return 20;
 
 }
+  async function calcularTudo(){
+
+let cidadeCliente = localStorage.getItem("cidadeCliente");
+let cidadeAcompanhante = "Setúbal"; // depois será dinâmico
+
+// obter coordenadas
+let coordCliente = await obterCoordenadas(cidadeCliente);
+let coordAcompanhante = await obterCoordenadas(cidadeAcompanhante);
+
+if(coordCliente && coordAcompanhante){
+
+let distancia = calcularDistanciaKmCoord(coordCliente, coordAcompanhante);
+
+let valor = Math.round(distancia * 0.5);
+
+if(cidadeCliente === cidadeAcompanhante){
+valor = 10;
+}
+
+document.getElementById("taxaDeslocamento").innerText =
+"Taxa de deslocamento: " + valor + "€";
+
+}else{
+
+document.getElementById("taxaDeslocamento").innerText =
+"Não foi possível calcular a distância";
+
+}
+
+}
+
+// função nova para coordenadas diretas
+function calcularDistanciaKmCoord(c1, c2){
+
+let R = 6371;
+
+let dLat = (c2.lat - c1.lat) * Math.PI / 180;
+let dLon = (c2.lng - c1.lng) * Math.PI / 180;
+
+let a =
+Math.sin(dLat/2) * Math.sin(dLat/2) +
+Math.cos(c1.lat * Math.PI / 180) *
+Math.cos(c2.lat * Math.PI / 180) *
+Math.sin(dLon/2) * Math.sin(dLon/2);
+
+let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+return R * c;
+
+}
+
+// EXECUTAR
+calcularTudo();
 </script>
 
 </div>
