@@ -152,7 +152,7 @@ ${totalTexto}`;
 
 let numero = localStorage.getItem("numeroAcompanhante") || "351931714823";
 
-let url = "https://web.whatsapp.com/send?phone=" + numero + "&text=" + encodeURIComponent(mensagem);
+let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
 salvarReserva({
   nome,
   endereco,
@@ -304,22 +304,39 @@ if(coordCliente && coordAcompanhante){
 
 let select = document.getElementById("servico");
 let valorServico = parseFloat(select.value);
+let textoServico = select.options[select.selectedIndex].text;
 
 let distancia = calcularDistanciaKmCoord(coordCliente, coordAcompanhante);
 
-let deslocamento = Math.round(distancia * 0.5);
+let deslocamento = 0;
 
-// mesma cidade = 10€
-if(cidadeCliente === cidadeAcompanhante){
-deslocamento = 10;
+// 🔥 se for deslocação
+if(textoServico.includes("Deslocação")){
+
+  deslocamento = Math.round(distancia * 0.5);
+
+  // mesma cidade = 10€
+  if(cidadeCliente === cidadeAcompanhante){
+    deslocamento = 10;
+  }
+
 }
 
+// 🔥 se for local
+if(textoServico.includes("Local")){
+  deslocamento = 0;
+}
 // mostrar valores
 document.getElementById("valorServico").innerText =
 "Valor do serviço: " + valorServico + "€";
 
-document.getElementById("taxaDeslocamento").innerText =
-"Taxa de deslocamento: " + deslocamento + "€";
+if(deslocamento === 0){
+  document.getElementById("taxaDeslocamento").innerText =
+  "Sem deslocamento";
+}else{
+  document.getElementById("taxaDeslocamento").innerText =
+  "Taxa de deslocamento: " + deslocamento + "€";
+}
 
 // AGORA SIM soma correto
 let total = valorServico + deslocamento;
