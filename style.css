@@ -78,16 +78,21 @@ background:#d4b45a;
 }
 @media (max-width: 600px){
 
+.hero{
+margin-top:20px;
+}
+
 .hero h1{
-font-size:36px;
+font-size:34px;
+margin-top:0;
 }
 
 .hero p{
-font-size:16px;
+font-size:15px;
 }
 
 .hero h2{
-font-size:20px;
+font-size:18px;
 }
 
 }
