@@ -274,7 +274,7 @@ Olá, sou uma acompanhante discreta...
 
 </div>
   
-<button class="botao" onclick="irReserva('351931714823','Anna')">
+<button class="botao" onclick="irReserva()">
 Reservar
 </button>
 
@@ -336,16 +336,30 @@ document.getElementById("fotoZoom").src = novaFoto;
 document.getElementById("fotoGrande").src = novaFoto;
 
 }
-function irReserva(numero,nome){
+function irReserva(){
 
+let nome = document.getElementById("nomePerfil").innerText;
 let cidade = document.getElementById("cidadePerfil").innerText;
+
+let numero = "";
+
+if(nome == "Maria"){
+  numero = "351900000001";
+}
+
+if(nome == "Julia"){
+  numero = "351900000002";
+}
+
+if(nome == "Ana"){
+  numero = "351900000003";
+}
 
 localStorage.setItem("numeroAcompanhante",numero);
 localStorage.setItem("nomeAcompanhante",nome);
 localStorage.setItem("cidadeAcompanhante",cidade);
 
 window.location.href="reserva.html";
-
 }
 </script>
 <script>
