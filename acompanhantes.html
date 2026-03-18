@@ -138,20 +138,20 @@ Pesquisar
   <!-- PERFIS PEQUENOS -->
 <div class="gridPerfis">
 
-  <div class="perfilMini">
-    <img src="maria.jpg">
-    <span>Maria</span>
-  </div>
+ <div class="perfilMini" onclick="abrirPerfil('maria')">
+  <img src="maria.jpg">
+  <span>Maria</span>
+</div>
+  
+  <div class="perfilMini" onclick="abrirPerfil('julia')">
+  <img src="julia.jpg">
+  <span>Julia</span>
+</div>
 
-  <div class="perfilMini">
-    <img src="julia.jpg">
-    <span>Julia</span>
-  </div>
-
-  <div class="perfilMini">
-    <img src="ana.jpg">
-    <span>Ana</span>
-  </div>
+<div class="perfilMini" onclick="abrirPerfil('ana')">
+  <img src="ana.jpg">
+  <span>Ana</span>
+</div>
 
 </div>
 
@@ -178,7 +178,10 @@ card.style.display = "none";
 });
 
 }
-
+function abrirPerfil(nome){
+  localStorage.setItem("perfilSelecionado", nome);
+  window.location.href = "perfil.html";
+}
 </script>
 </body>
 </html>
