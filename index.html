@@ -36,6 +36,35 @@ white-space:normal;
 }
 
 }
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+box-sizing:border-box;
+gap:15px;
+
+background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1520975922284-9e0f3f0c6b9f');
+background-size:cover;
+background-position:center;
+}
+button{
+background:#C9A24A;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#b8933f;
+transform:scale(1.05);
+}
 </style>
 </head>
 
@@ -64,18 +93,19 @@ PrivateLux
 
 <h1>PrivateLux</h1>
 
-<p>Exclusive companions platform</p>
+<p>Plataforma exclusiva de acompanhantes</p>
+<p style="opacity:0.8;">Discrição. Luxo. Experiência exclusiva.</p>
 
 <h2>Como deseja entrar?</h2>
 
 <div class="botoesEntrada">
 
 <button onclick="window.location.href='acompanhantes.html'" style="margin:10px; padding:15px 30px;">
-Entrar como visitante
+Sou cliente
 </button>
 
 <button onclick="window.location.href='painel.html'" style="margin:10px; padding:15px 30px;">
-Entrar como anunciante
+Sou acompanhante
 </button>
 </div>
 
