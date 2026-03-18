@@ -71,13 +71,11 @@ background:#d4b45a;
 @media (max-width: 600px){
 
 .hero{
-margin-top:0 !important;
-padding-top:20px;
+padding-top:60px;
 }
 
 .hero h1{
 font-size:32px;
-margin-top:0;
 }
 
 .hero p{
