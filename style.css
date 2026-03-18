@@ -75,3 +75,27 @@ cursor:pointer;
 button:hover{
 background:#d4b45a;
 }
+@media (max-width: 600px){
+
+body{
+font-size:18px;
+}
+
+h1{
+font-size:32px;
+}
+
+h2{
+font-size:24px;
+}
+
+p{
+font-size:16px;
+}
+
+button{
+font-size:18px;
+padding:18px;
+}
+
+}
