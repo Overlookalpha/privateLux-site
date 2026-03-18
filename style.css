@@ -2,15 +2,7 @@ body{
 margin:0;
 font-family:Arial;
 color:#F2F2F2;
-
-background-image:
-linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-url("ima.webp");
-
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-height:100vh;
+background:#000;
 }
 
 /* MENU */
