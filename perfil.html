@@ -226,7 +226,7 @@ Seu navegador não suporta vídeo.
   
 <!-- INFORMAÇÕES -->
 
-<div class="nome">Anna</div>
+<div class="nome" id="nomePerfil">Anna</div>
 
 <div class="cidade" id="cidadePerfil">Lisboa</div>
 
@@ -368,7 +368,19 @@ if(video){
 document.getElementById("videoPerfil").innerHTML =
 '<source src="' + video + '" type="video/mp4">';
 }
+let perfil = localStorage.getItem("perfilSelecionado");
 
+if(perfil == "maria"){
+  document.getElementById("nomePerfil").innerText = "Maria";
+}
+
+if(perfil == "julia"){
+  document.getElementById("nomePerfil").innerText = "Julia";
+}
+
+if(perfil == "ana"){
+  document.getElementById("nomePerfil").innerText = "Ana";
+}
 </script>
 </body>
 </html>
