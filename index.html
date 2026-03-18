@@ -43,6 +43,24 @@ padding-top:60px;
 margin-top:5px;
 margin-bottom:10px;
 }
+  .hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:0;
+}
+  .hero{
+position:relative;
+}
+
+.hero *{
+position:relative;
+z-index:1;
+}
 .hero{
 display:flex;
 flex-direction:column;
@@ -53,7 +71,7 @@ padding:0;
 margin:0;
 gap:15px;
 
-background:#000;
+background: url('https://images.unsplash.com/photo-1520975922284-9e0f3f0c6b9f') center/cover no-repeat;
 background-size:cover;
 background-position:center;
 }
