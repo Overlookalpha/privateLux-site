@@ -343,6 +343,14 @@ return 20;
   async function calcularTudo(){
 
 let cidadeCliente = document.getElementById("cidadeCliente").value;
+if(!cidadeCliente || cidadeCliente.length < 3){
+
+  document.getElementById("taxaDeslocamento").innerText = "Taxa de deslocamento: --";
+  document.getElementById("valorServico").innerText = "Valor do serviço: --";
+  document.getElementById("valorTotal").innerText = "Total: --";
+
+  return;
+}
 let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante") || "Setúbal";
 let select = document.getElementById("servico");
 
