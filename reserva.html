@@ -516,9 +516,18 @@ valor = ajustarValorStripe(valor);
     return;
   }
 
-  // 🔥 STRIPE LINK REAL
-  window.open("https://buy.stripe.com/test_28E9AV9cG6Hg3ps7JC9ws00", "_blank");
+  let link = "";
 
+if(valor == 15){
+  link = "https://buy.stripe.com/test_28E9AV9cG6Hg3ps7JC9ws00";
+}
+
+if(!link){
+  alert("Valor não configurado ainda: " + valor + "€");
+  return;
+}
+
+window.open(link, "_blank");
 }
 </script>
 
