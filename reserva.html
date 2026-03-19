@@ -147,6 +147,9 @@ let dados = JSON.parse(localStorage.getItem("valoresServicos"));
 let select = document.getElementById("servico");
 if(dados){
 dados.forEach(item => {
+if(select.options.length > 0){
+  select.selectedIndex = 0;
+}
 
 let option = document.createElement("option");
 option.value = item.valor;
@@ -417,7 +420,9 @@ return R * c;
 }
 
 // EXECUTAR
-calcularTudo();
+window.onload = function(){
+  calcularTudo();
+}
 </script>
 
 </div>
