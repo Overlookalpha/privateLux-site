@@ -500,12 +500,15 @@ return R * c;
 window.onload = function(){
   calcularTudo();
 }
+  function ajustarValorStripe(valor){
+  return Math.ceil(valor / 5) * 5;
+}
 function pagarDeslocamento(){
 
   let texto = document.getElementById("taxaDeslocamento").innerText;
 
-  let valor = texto.replace(/\D/g, "");
-
+ let valor = parseInt(texto.replace(/\D/g, ""));
+valor = ajustarValorStripe(valor);
   if(!valor || valor == 0){
     alert("Não há deslocamento para pagar.");
     return;
