@@ -558,8 +558,6 @@ if(!link){
   return;
 }
 
-let idPagamento = localStorage.getItem("idPagamento") || Date.now();
-
 let separador = link.includes("?") ? "&" : "?";
 window.open(link + separador + "client_reference_id=" + idPagamento, "_blank");
 }
