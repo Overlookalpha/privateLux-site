@@ -344,7 +344,27 @@ return 20;
 
 let cidadeCliente = document.getElementById("cidadeCliente").value;
 let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante") || "Setúbal";
+let select = document.getElementById("servico");
 
+// percorrer opções
+for(let i = 0; i < select.options.length; i++){
+
+  let texto = select.options[i].text;
+
+  // se for LOCAL e cidades diferentes
+  if(texto.includes("Local") && cidadeCliente !== cidadeAcompanhante){
+    select.options[i].disabled = true;
+  }else{
+    select.options[i].disabled = false;
+  }
+
+}
+ // se opção atual for inválida, troca automaticamente
+let textoAtual = select.options[select.selectedIndex].text;
+
+if(textoAtual.includes("Local") && cidadeCliente !== cidadeAcompanhante){
+  select.selectedIndex = 0;
+}
 // obter coordenadas
 let coordCliente = await obterCoordenadas(cidadeCliente);
 let coordAcompanhante = await obterCoordenadas(cidadeAcompanhante);
