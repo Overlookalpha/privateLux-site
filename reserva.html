@@ -433,6 +433,22 @@ let distancia = calcularDistanciaKmCoord(coordCliente, coordAcompanhante);
 
 let deslocamento = 0;
 
+if(distancia <= 10){
+  deslocamento = 20;
+}
+else if(distancia <= 20){
+  deslocamento = 30;
+}
+else if(distancia <= 30){
+  deslocamento = 50;
+}
+else if(distancia <= 50){
+  deslocamento = 80;
+}
+else{
+  deslocamento = 100;
+}
+
 // 🔥 se for deslocação
 if(textoServico.includes("Deslocação")){
 
