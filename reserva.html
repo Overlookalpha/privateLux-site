@@ -527,8 +527,11 @@ window.onload = function(){
   return Math.ceil(valor / 5) * 5;
 }
 function pagarDeslocamento(){
-
-  let texto = document.getElementById("taxaDeslocamento").innerText;
+  
+let idPagamento = Date.now();
+localStorage.setItem("idPagamento", idPagamento);
+  
+let texto = document.getElementById("taxaDeslocamento").innerText;
 
  let valor = parseInt(texto.replace(/\D/g, ""));
 valor = ajustarValorStripe(valor);
