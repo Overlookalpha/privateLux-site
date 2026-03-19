@@ -445,10 +445,18 @@ else if(distancia <= 30){
 else if(distancia <= 50){
   deslocamento = 80;
 }
-else{
-  deslocamento = 100;
+else if(distancia <= 80){
+  deslocamento = 120;
 }
-
+else if(distancia <= 120){
+  deslocamento = 180;
+}
+else if(distancia <= 200){
+  deslocamento = 250;
+}
+else{
+  deslocamento = 300;
+}
 // 🔥 se for deslocação
 if(textoServico.includes("Deslocação")){
   
