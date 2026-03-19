@@ -176,6 +176,13 @@ document.getElementById("tituloReserva").innerText =
   
 function enviarWhatsApp(){
 
+let pagamento = localStorage.getItem("pagamentoDeslocamento");
+
+if(!pagamento){
+  alert("Você precisa pagar o deslocamento antes de confirmar.");
+  return;
+}
+
 let nome = document.querySelector("input[name='nome']").value;
 let endereco = document.querySelector("input[name='endereco']").value;
 let horario = document.querySelector("input[name='horario']").value;
