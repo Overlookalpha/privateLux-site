@@ -461,9 +461,9 @@ else{
 if(textoServico.includes("Deslocação")){
   
 
-  // mesma cidade = 10€
+  // mesma cidade = 15€
   if(cidadeCliente === cidadeAcompanhante){
-    deslocamento = 10;
+    deslocamento = 15;
   }
 
 }
@@ -538,12 +538,14 @@ valor = ajustarValorStripe(valor);
   }
 
  let links = {
-  10: "LINK_10",
-  20: "LINK_20",
-  30: "LINK_30",
-  50: "LINK_50",
-  80: "LINK_80",
-  100: "LINK_100"
+  15: "https://buy.stripe.com/test_28E9AV9cG6Hg3ps7JC9ws00",
+  30: "https://buy.stripe.com/test_3cI8wRcoS4z87FI6Fy9ws01",
+  50: "https://buy.stripe.com/test_3cI3cx3Sm4z88JM8NG9ws02",
+  80: "https://buy.stripe.com/test_9B6fZjex08Po5xA1le9ws03",
+  120: "https://buy.stripe.com/test_14A14p3Sm5Dc9NQd3W9ws04",
+  180: "https://buy.stripe.com/test_7sYbJ31Ked5E2lo8NG9ws05",
+  250: "https://buy.stripe.com/test_9B614p1KefdM4tw1le9ws06",
+  300: "https://buy.stripe.com/test_3cIcN79cG9TsbVY7JC9ws07"
 };
 
 let link = links[valor];
