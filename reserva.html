@@ -176,7 +176,13 @@ document.getElementById("tituloReserva").innerText =
   
 function enviarWhatsApp(){
 
-let pagamento = localStorage.getItem("pagamentoDeslocamento");
+let cidadeCliente = document.getElementById("cidadeCliente").value;
+let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante");
+let servico = document.getElementById("servico").value;
+
+let chave = cidadeCliente + "" + cidadeAcompanhante + "" + servico;
+
+let pagamento = localStorage.getItem("pagamento_" + chave);
 
 if(!pagamento){
   alert("Você precisa pagar o deslocamento antes de confirmar.");
@@ -487,7 +493,13 @@ function pagarDeslocamento(){
     return;
   }
 
-  localStorage.setItem("pagamentoDeslocamento", valor);
+  let cidadeCliente = document.getElementById("cidadeCliente").value;
+let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante");
+let servico = document.getElementById("servico").value;
+
+let chave = cidadeCliente + "" + cidadeAcompanhante + "" + servico;
+
+localStorage.setItem("pagamento_" + chave, valor);
 
   alert("Pagamento de " + valor + "€ realizado com sucesso 💰");
 
