@@ -363,7 +363,18 @@ for(let i = 0; i < select.options.length; i++){
 let textoAtual = select.options[select.selectedIndex].text;
 
 if(textoAtual.includes("Local") && cidadeCliente !== cidadeAcompanhante){
-  select.selectedIndex = 0;
+
+  for(let i = 0; i < select.options.length; i++){
+    
+    let texto = select.options[i].text;
+
+    if(!texto.includes("Local")){
+      select.selectedIndex = i;
+      break;
+    }
+
+  }
+
 }
 // obter coordenadas
 let coordCliente = await obterCoordenadas(cidadeCliente);
