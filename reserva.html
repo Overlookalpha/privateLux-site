@@ -199,7 +199,8 @@ let cidadeCliente = document.getElementById("cidadeCliente").value;
 let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante");
 
 
-let chave = cidadeCliente + "" + cidadeAcompanhante + "" + servico;
+let selectServico = document.getElementById("servico");
+let chave = cidadeCliente + "" + cidadeAcompanhante + "" + selectServico.value;
 
 let pagamento = localStorage.getItem("pagamento_" + chave);
 
