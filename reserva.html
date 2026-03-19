@@ -558,9 +558,10 @@ if(!link){
   return;
 }
 
-let idPagamento = localStorage.getItem("idPagamento");
+let idPagamento = localStorage.getItem("idPagamento") || Date.now();
 
-window.open(link + "?client_reference_id=" + idPagamento, "_blank");
+let separador = link.includes("?") ? "&" : "?";
+window.open(link + separador + "client_reference_id=" + idPagamento, "_blank");
 }
 </script>
 
