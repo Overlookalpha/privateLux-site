@@ -151,21 +151,21 @@ Pagar deslocamento
 
 let dados = JSON.parse(localStorage.getItem("valoresServicos"));
 let select = document.getElementById("servico");
+
 if(dados){
-dados.forEach(item => {
-if(select.options.length > 0){
+  dados.forEach(item => {
+
+    let option = document.createElement("option");
+    option.value = item.valor;
+    option.text = item.nome + " (" + item.valor + "€)";
+
+    select.appendChild(option);
+
+  });
+
+  // só depois define o selecionado
   select.selectedIndex = 0;
 }
-
-let option = document.createElement("option");
-option.value = item.valor;
-option.text = item.nome + " (" + item.valor + "€)";
-
-select.appendChild(option);
-
-});
-}
-
 let valorBase = select.value;
 let nomeAcompanhante = localStorage.getItem("nomeAcompanhante");
 
