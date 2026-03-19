@@ -504,7 +504,6 @@ function pagarDeslocamento(){
 
   let texto = document.getElementById("taxaDeslocamento").innerText;
 
-  // pegar só números
   let valor = texto.replace(/\D/g, "");
 
   if(!valor || valor == 0){
@@ -512,15 +511,8 @@ function pagarDeslocamento(){
     return;
   }
 
-  let cidadeCliente = document.getElementById("cidadeCliente").value;
-let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante");
-let servico = document.getElementById("servico").value;
-
-let chave = cidadeCliente + "" + cidadeAcompanhante + "" + servico;
-
-localStorage.setItem("pagamento_" + chave, valor);
-
-  alert("Pagamento de " + valor + "€ realizado com sucesso 💰");
+  // 🔥 STRIPE LINK REAL
+  window.open("https://buy.stripe.com/test_28E9AV9cG6Hg3ps7JC9ws00", "_blank");
 
 }
 </script>
