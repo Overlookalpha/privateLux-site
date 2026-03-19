@@ -558,7 +558,9 @@ if(!link){
   return;
 }
 
-window.open(link, "_blank");
+let idPagamento = localStorage.getItem("idPagamento");
+
+window.open(link + "?client_reference_id=" + idPagamento, "_blank");
 }
 </script>
 
