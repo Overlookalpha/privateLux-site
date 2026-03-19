@@ -162,7 +162,7 @@ left:30px;
 #lightbox .direita{
 right:30px;
 }
-  @media (max-width: 768px){
+ @media (max-width: 768px){
 
   h1{
     font-size: 28px !important;
@@ -178,6 +178,17 @@ right:30px;
 
   span{
     font-size: 18px !important;
+  }
+
+  .galeria{
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap:10px;
+  }
+
+  .galeria img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
   }
 
 }
