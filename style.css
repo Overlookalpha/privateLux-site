@@ -159,3 +159,16 @@ padding:18px;
   }
 
 }
+/* MOBILE FORÇADO */
+@media (max-width: 768px){
+
+  .grid{
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  .card{
+    width:100% !important;
+  }
+
+}
