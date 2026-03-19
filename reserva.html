@@ -529,26 +529,19 @@ valor = ajustarValorStripe(valor);
     return;
   }
 
-  let link = "";
+ let links = {
+  10: "LINK_10",
+  20: "LINK_20",
+  30: "LINK_30",
+  50: "LINK_50",
+  80: "LINK_80",
+  100: "LINK_100"
+};
 
-  if(valor == 10){
-  link = "LINK_10";
-}
-
-if(valor == 15){
-  link = "https://buy.stripe.com/test_28E9AV9cG6Hg3ps7JC9ws00";
-}
-
-if(valor == 20){
-  link = "LINK_20";
-}
-
-if(valor == 25){
-  link = "LINK_25";
-}
+let link = links[valor];
 
 if(!link){
-  alert("Valor não configurado ainda: " + valor + "€");
+  alert("Valor não configurado: " + valor + "€");
   return;
 }
 
