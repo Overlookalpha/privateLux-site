@@ -332,29 +332,6 @@ let distancia = R * c;
 return distancia;
 
 }
-
-async function obterCoordenadas(cidade){
-
-try{
-
-let resposta = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${cidade},Portugal`);
-
-let dados = await resposta.json();
-
-if(dados.length > 0){
-return {
-lat: parseFloat(dados[0].lat),
-lng: parseFloat(dados[0].lon)
-};
-}
-
-return null;
-
-}catch(e){
-return null;
-}
-
-}
   
 function calcularDeslocamento(cliente, acompanhante){
 
@@ -421,8 +398,8 @@ if(textoAtual.includes("Local") && cidadeCliente !== cidadeAcompanhante){
 
 }
 // obter coordenadas
-let coordCliente = await obterCoordenadas(cidadeCliente);
-let coordAcompanhante = await obterCoordenadas(cidadeAcompanhante);
+let coordCliente = coordenadas[cidadeCliente];
+let coordAcompanhante = coordenadas[cidadeAcompanhante];
 
 if(coordCliente && coordAcompanhante){
 
