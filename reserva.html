@@ -113,6 +113,9 @@ PrivateLux
   
 <label>Seu nome</label>
 <input type="text" name="nome">
+  
+<label>Cidade</label>
+<input type="text" id="cidadeCliente" placeholder="Ex: Lisboa">
 
 <label>Endereço</label>
 <input type="text" name="endereco">
@@ -339,7 +342,7 @@ return 20;
 }
   async function calcularTudo(){
 
-let cidadeCliente = localStorage.getItem("cidadeCliente");
+let cidadeCliente = document.getElementById("cidadeCliente").value;
 let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante") || "Setúbal";
 
 // obter coordenadas
