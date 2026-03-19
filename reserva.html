@@ -149,23 +149,42 @@ Pagar deslocamento
 
 <script>
 
-let dados = JSON.parse(localStorage.getItem("valoresServicos"));
 let select = document.getElementById("servico");
 
-if(dados){
-  dados.forEach(item => {
+// tenta pegar do localStorage
+let dados = JSON.parse(localStorage.getItem("valoresServicos"));
 
-    let option = document.createElement("option");
-    option.value = item.valor;
-    option.text = item.nome + " (" + item.valor + "€)";
+// 🔥 fallback se não existir
+if(!dados){
 
-    select.appendChild(option);
+  dados = [
+    {nome: "Local - 30min", valor: 60},
+    {nome: "Local - 1h", valor: 100},
+    {nome: "Deslocação - 30min", valor: 100},
+    {nome: "Deslocação - 1h", valor: 150},
+    {nome: "Deslocação - 2h", valor: 280},
+    {nome: "Deslocação - 3h", valor: 400}
+  ];
 
-  });
-
-  // só depois define o selecionado
-  select.selectedIndex = 0;
+  localStorage.setItem("valoresServicos", JSON.stringify(dados));
 }
+
+// limpa antes
+select.innerHTML = "";
+
+// adiciona opções
+dados.forEach(item => {
+
+  let option = document.createElement("option");
+  option.value = item.valor;
+  option.text = item.nome + " (" + item.valor + "€)";
+
+  select.appendChild(option);
+
+});
+
+// seleciona primeiro
+select.selectedIndex = 0;
 let valorBase = select.value;
 let nomeAcompanhante = localStorage.getItem("nomeAcompanhante");
 
