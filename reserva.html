@@ -352,6 +352,29 @@ return Math.round(distancia * 0.5); // 0.5€ por km
 return 20;
 
 }
+  async function obterCoordenadas(cidade){
+
+try{
+
+let url = "https://corsproxy.io/?https://nominatim.openstreetmap.org/search?format=json&q=" + cidade + ",Portugal";
+
+let resposta = await fetch(url);
+let dados = await resposta.json();
+
+if(dados.length > 0){
+return {
+lat: parseFloat(dados[0].lat),
+lng: parseFloat(dados[0].lon)
+};
+}
+
+return null;
+
+}catch(e){
+return null;
+}
+
+}
   async function calcularTudo(){
 
 let cidadeCliente = document.getElementById("cidadeCliente").value;
@@ -397,8 +420,8 @@ if(textoAtual.includes("Local") && cidadeCliente !== cidadeAcompanhante){
 
 }
 // obter coordenadas
-let coordCliente = coordenadas[cidadeCliente];
-let coordAcompanhante = coordenadas[cidadeAcompanhante];
+let coordCliente = await obterCoordenadas(cidadeCliente);
+let coordAcompanhante = await obterCoordenadas(cidadeAcompanhante);
 
 if(coordCliente && coordAcompanhante){
 
