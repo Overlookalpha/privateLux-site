@@ -610,12 +610,6 @@ let valores = [
 
 localStorage.setItem("valoresServicos", JSON.stringify(valores));
 
-let video = localStorage.getItem("videoPerfil");
-
-if(video){
-document.getElementById("videoPerfil").innerHTML =
-'<source src="' + video + '" type="video/mp4">';
-}
 let perfil = localStorage.getItem("perfilSelecionado");
 let galeria = document.querySelector(".galeria");
 function gerarGaleria(){
