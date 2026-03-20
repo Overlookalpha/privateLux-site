@@ -234,6 +234,9 @@ font-weight:bold;
 
 <div class="galeria">
 
+<div onclick="clicouBloqueado(this)" style="background:red; padding:20px; text-align:center;">
+TESTE CLIQUE
+</div>
 
 <div class="foto livre">
   <img src="anna.jpg" onclick="trocarFoto(this)">
@@ -451,6 +454,9 @@ if(nivel === "elite" && vip === "elite"){
 
 // se não tiver acesso
 alert("Seu plano não permite acessar este conteúdo.");
+}
+  function clicouBloqueado(el){
+  alert("FUNCIONOU!");
 }
 </script>
 <script>
