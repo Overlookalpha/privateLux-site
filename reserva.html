@@ -148,6 +148,13 @@ Pagar deslocamento
 <button type="button" onclick="enviarWhatsApp()">Confirmar reserva</button>
 
 <script>
+// 🔥 detectar retorno do pagamento Stripe
+const params = new URLSearchParams(window.location.search);
+const status = params.get("status");
+
+if(status === "ok"){
+  localStorage.setItem("pagamento_confirmado", "true");
+}
 
 let select = document.getElementById("servico");
 
@@ -202,7 +209,7 @@ let cidadeAcompanhante = localStorage.getItem("cidadeAcompanhante");
 let selectServico = document.getElementById("servico");
 let chave = cidadeCliente + "" + cidadeAcompanhante + "" + selectServico.value;
 
-let pagamento = localStorage.getItem("pagamento_" + chave);
+let pagamento = localStorage.getItem("pagamento_confirmado");
 
 if(!pagamento){
   alert("Você precisa pagar o deslocamento antes de confirmar.");
@@ -248,6 +255,7 @@ salvarReserva({
   criadoEm: new Date().toISOString()
 });
 window.open(url, "_blank");
+localStorage.removeItem("pagamento_confirmado");
 
 }
 
