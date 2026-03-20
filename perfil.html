@@ -527,7 +527,7 @@ function gerarGaleria(){
 
   for(let i = 1; i <= 12; i++){
 
-    // 🔓 LIBERADAS
+    // 🔓 LIVRES
     if(i <= 3){
       html += `
       <div class="foto-container">
@@ -536,12 +536,32 @@ function gerarGaleria(){
       `;
     }
 
-    // 🔒 BLOQUEADAS
+    // 🔒 BÁSICO (4–6)
+    else if(i <= 6){
+      html += `
+      <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
+        <img src="https://picsum.photos/300?${i}">
+        <div class="overlay">🔒 Básico</div>
+      </div>
+      `;
+    }
+
+    // 🔥 VIP (7–9)
+    else if(i <= 9){
+      html += `
+      <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
+        <img src="https://picsum.photos/300?${i}">
+        <div class="overlay">🔒 🔥 VIP</div>
+      </div>
+      `;
+    }
+
+    // 💎 ELITE (10–12)
     else{
       html += `
       <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
         <img src="https://picsum.photos/300?${i}">
-        <div class="overlay">🔒 VIP</div>
+        <div class="overlay">🔒 💎 Elite</div>
       </div>
       `;
     }
