@@ -112,20 +112,20 @@ PrivateLux
 <h2 id="tituloReserva">Reservar Atendimento</h2>
   
 <label>Seu nome</label>
-<input type="text" name="nome">
+<input type="text" name="nome" oninput="salvarFormulario()">
   
 <label>Cidade</label>
-<input type="text" id="cidadeCliente" placeholder="Ex: Lisboa" oninput="calcularTudo()">
+<input type="text" id="cidadeCliente" oninput="calcularTudo(); salvarFormulario()">
 
 <label>Endereço</label>
-<input type="text" name="endereco">
+<input type="text" name="endereco" oninput="salvarFormulario()">
 
 <label>Horário</label>
-<input type="text" name="horario">
+<input type="text" name="horario" oninput="salvarFormulario()">
 
 <label>Escolha o serviço</label>
 
-<select id="servico" onchange="calcularTudo()" style="width:100%; padding:10px; margin-bottom:20px; background:#1a1a1a; color:white;">
+<select id="servico" onchange="calcularTudo(); salvarFormulario()">
 </select>
 
 <div id="taxaDeslocamento" style="margin:15px 0; font-size:18px;">
@@ -148,6 +148,15 @@ Pagar deslocamento
 <button type="button" onclick="enviarWhatsApp()">Confirmar reserva</button>
 
 <script>
+// 🔥 salvar automaticamente os campos
+function salvarFormulario(){
+
+  localStorage.setItem("form_nome", document.querySelector("input[name='nome']").value);
+  localStorage.setItem("form_cidade", document.getElementById("cidadeCliente").value);
+  localStorage.setItem("form_endereco", document.querySelector("input[name='endereco']").value);
+  localStorage.setItem("form_horario", document.querySelector("input[name='horario']").value);
+
+}
 // 🔥 detectar retorno do pagamento Stripe
 const params = new URLSearchParams(window.location.search);
 const status = params.get("status");
@@ -155,7 +164,20 @@ const status = params.get("status");
 if(status === "ok"){
   localStorage.setItem("pagamento_confirmado", "true");
 }
+// 🔥 restaurar dados ao carregar a página
+window.addEventListener("load", () => {
 
+  document.querySelector("input[name='nome']").value = localStorage.getItem("form_nome") || "";
+  document.getElementById("cidadeCliente").value = localStorage.getItem("form_cidade") || "";
+  document.querySelector("input[name='endereco']").value = localStorage.getItem("form_endereco") || "";
+  document.querySelector("input[name='horario']").value = localStorage.getItem("form_horario") || "";
+
+  let servico = localStorage.getItem("form_servico");
+  if(servico){
+    document.getElementById("servico").value = servico;
+  }
+
+});
 let select = document.getElementById("servico");
 
 // tenta pegar do localStorage
@@ -535,6 +557,12 @@ window.onload = function(){
   return Math.ceil(valor / 5) * 5;
 }
 function pagarDeslocamento(){
+// 🔥 salvar dados antes de ir pagar
+localStorage.setItem("form_nome", document.querySelector("input[name='nome']").value);
+localStorage.setItem("form_cidade", document.getElementById("cidadeCliente").value);
+localStorage.setItem("form_endereco", document.querySelector("input[name='endereco']").value);
+localStorage.setItem("form_horario", document.querySelector("input[name='horario']").value);
+localStorage.setItem("form_servico", document.getElementById("servico").value);
   
 let idPagamento = Date.now();
 localStorage.setItem("idPagamento", idPagamento);
@@ -567,7 +595,7 @@ if(!link){
 }
 
 let separador = link.includes("?") ? "&" : "?";
-window.open(link + separador + "client_reference_id=" + idPagamento, "_blank");
+window.location.href = link + separador + "client_reference_id=" + idPagamento;
 }
 </script>
 
