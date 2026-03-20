@@ -294,26 +294,7 @@ font-weight:bold;
 <!-- GALERIA -->
 
 <div class="galeria">
-
-<div onclick="clicouBloqueado(this)" style="background:red; padding:20px; text-align:center;">
-TESTE CLIQUE
-</div>
-
-<div class="foto livre">
-  <img src="anna.jpg" onclick="trocarFoto(this)">
-</div>
-
-<div class="foto bloqueada" data-nivel="basico" onclick="clicouBloqueado(this)">
-  🔒 Básico
-</div>
-
-<div class="foto bloqueada" data-nivel="premium" onclick="clicouBloqueado(this)">
-  🔒 Premium
-</div>
-
-<div class="foto bloqueada" data-nivel="elite" onclick="clicouBloqueado(this)">
-  🔒 Elite
-</div>
+  
 <img src="fundo.webp" onclick="trocarFoto(this)">
 <img src="ima.webp" onclick="trocarFoto(this)">
 <img src="anna.jpg" onclick="trocarFoto(this)">
@@ -540,7 +521,35 @@ document.getElementById("videoPerfil").innerHTML =
 }
 let perfil = localStorage.getItem("perfilSelecionado");
 let galeria = document.querySelector(".galeria");
+function gerarGaleria(){
 
+  let html = "";
+
+  for(let i = 1; i <= 12; i++){
+
+    // 🔓 LIBERADAS
+    if(i <= 3){
+      html += `
+      <div class="foto-container">
+        <img src="https://picsum.photos/300?${i}" onclick="trocarFoto(this)">
+      </div>
+      `;
+    }
+
+    // 🔒 BLOQUEADAS
+    else{
+      html += `
+      <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
+        <img src="https://picsum.photos/300?${i}">
+        <div class="overlay">🔒 VIP</div>
+      </div>
+      `;
+    }
+
+  }
+
+  return html;
+}
 if(perfil == "maria"){
   document.getElementById("nomePerfil").innerText = "Maria";
   document.getElementById("fotoGrande").src = "https://picsum.photos/600";
@@ -548,10 +557,7 @@ if(perfil == "maria"){
   document.getElementById("descricaoPerfil").innerText = "Sou Maria, uma acompanhante carinhosa e discreta em Lisboa. Atendimento com atenção, conforto e total sigilo.";
 
   galeria.innerHTML = `
-    <img src="https://picsum.photos/300" onclick="trocarFoto(this)">
-    <img src="https://picsum.photos/301" onclick="trocarFoto(this)">
-    <img src="https://picsum.photos/302" onclick="trocarFoto(this)">
-    <img src="https://picsum.photos/303" onclick="trocarFoto(this)">
+    ${gerarGaleria()}
   `;
 }
 
@@ -562,25 +568,8 @@ if(perfil == "julia"){
   document.getElementById("descricaoPerfil").innerText = "Sou Julia, adoro momentos intensos e envolventes. Atendimento em Porto com total dedicação e simpatia.";
 
   galeria.innerHTML = `
-
-<div class="foto-container">
-  <img src="https://picsum.photos/300" onclick="trocarFoto(this)">
-</div>
-
-<div class="foto-container">
-  <img src="https://picsum.photos/301" onclick="trocarFoto(this)">
-</div>
-
-<div class="foto-container">
-  <img src="https://picsum.photos/302" onclick="trocarFoto(this)">
-</div>
-
-<div class="foto-container bloqueada">
-  <img src="https://picsum.photos/303">
-  <div class="overlay">🔒 VIP</div>
-</div>
-
-`;
+    ${gerarGaleria()}
+  `;
 }
 
 if(perfil == "ana"){
@@ -590,10 +579,7 @@ if(perfil == "ana"){
   document.getElementById("descricaoPerfil").innerText = "Sou Ana, elegante e tranquila. Proporciono momentos únicos com calma, respeito e muita conexão.";
 
   galeria.innerHTML = `
-    <img src="https://picsum.photos/308" onclick="trocarFoto(this)">
-    <img src="https://picsum.photos/309" onclick="trocarFoto(this)">
-    <img src="https://picsum.photos/310" onclick="trocarFoto(this)">
-    <img src="https://picsum.photos/311" onclick="trocarFoto(this)">
+    ${gerarGaleria()}
   `;
 }
 </script>
