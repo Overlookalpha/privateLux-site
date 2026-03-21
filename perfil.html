@@ -607,78 +607,84 @@ function clicouBloqueado(el){
  function gerarVideos(){
 
   let container = document.querySelector(".galeria-videos");
+  let vip = localStorage.getItem("vip_nivel");
 
- let videos = [
-  "https://www.w3schools.com/html/mov_bbb.mp4",
-  "https://www.w3schools.com/html/movie.mp4",
-  "https://www.w3schools.com/html/mov_bbb.mp4",
-  "https://www.w3schools.com/html/movie.mp4",
-  "https://www.w3schools.com/html/mov_bbb.mp4",
-  "https://www.w3schools.com/html/movie.mp4"
-];
+  let videos = [
+    "https://www.w3schools.com/html/mov_bbb.mp4",
+    "https://www.w3schools.com/html/movie.mp4",
+    "https://www.w3schools.com/html/mov_bbb.mp4",
+    "https://www.w3schools.com/html/movie.mp4",
+    "https://www.w3schools.com/html/mov_bbb.mp4",
+    "https://www.w3schools.com/html/movie.mp4"
+  ];
 
   let html = "";
 
   for(let i = 0; i < videos.length; i++){
 
-    // primeiro livre
-   if(i === 0){
-  continue;
-}
+    // 🎥 PRIMEIRO LIVRE (continua igual)
+    if(i === 0){
+      continue;
+    }
 
-// básico
-if(i <= 2){
-  html += `
-  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video 
-      src="${videos[i]}" 
-      muted 
-      playsinline 
-      autoplay 
-      loop
-    ></video>
-    <div class="video-blur"></div>
-    <div class="overlay">🔒 Básico</div>
-  </div>
-  `;
-}
+    let liberado = false;
+    let label = "";
 
-// VIP
-else if(i <= 4){
-  html += `
-  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video 
-      src="${videos[i]}" 
-      muted 
-      playsinline 
-      autoplay 
-      loop
-    ></video>
-    <div class="video-blur"></div>
-    <div class="overlay">🔒 🔥 VIP</div>
-  </div>
-  `;
-}
+    // 🔓 BÁSICO
+    if(i <= 2){
+      label = "🔒 Básico";
+      if(vip) liberado = true;
+    }
 
-// Elite
-else{
-  html += `
-  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video 
-      src="${videos[i]}" 
-      muted 
-      playsinline 
-      autoplay 
-      loop
-    ></video>
-    <div class="video-blur"></div>
-    <div class="overlay">🔒 💎 Elite</div>
-  </div>
-  `;
-   }
-}
+    // 🔥 VIP
+    else if(i <= 4){
+      label = "🔒 🔥 VIP";
+      if(vip === "vip" || vip === "elite") liberado = true;
+    }
+
+    // 💎 ELITE
+    else{
+      label = "🔒 💎 Elite";
+      if(vip === "elite") liberado = true;
+    }
+
+    // 🔓 LIBERADO (sem blur)
+    if(liberado){
+      html += `
+      <div class="video-item" onclick="trocarVideo(this)">
+        <video 
+          src="${videos[i]}" 
+          muted 
+          playsinline 
+          autoplay 
+          loop
+        ></video>
+      </div>
+      `;
+    }
+
+    // 🔒 BLOQUEADO (mantém teu visual original)
+    else{
+      html += `
+      <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+        <video 
+          src="${videos[i]}" 
+          muted 
+          playsinline 
+          autoplay 
+          loop
+        ></video>
+        <div class="video-blur"></div>
+        <div class="overlay">${label}</div>
+      </div>
+      `;
+    }
+
+  }
+
   container.innerHTML = html;
 
+  // 👇 mantém preview visível (ESSENCIAL)
   let vids = document.querySelectorAll(".video-item video");
 
   vids.forEach(v => {
@@ -687,10 +693,9 @@ else{
     });
   });
 
-  // já coloca o primeiro no vídeo principal
+  // 🎥 vídeo principal continua igual
   document.getElementById("videoPrincipal").src = videos[0];
 }
-
 // função trocar vídeo
 function trocarVideo(el){
   let video = el.querySelector("video").src;
