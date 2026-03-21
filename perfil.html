@@ -581,59 +581,57 @@ alert("Seu plano não permite acessar este conteúdo.");
 
     // primeiro livre
     if(i === 0){
-      continue;
-    }
-
-    // básico
-    if(i <= 2){
-      html += `
-     <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-  <video 
-  src="${videos[i]}" 
-  muted 
-  playsinline 
-  autoplay 
-  loop
-></video>
-  <div class="video-blur"></div>
-  <div class="overlay">🔒 Básico</div>
-</div>
-`;
+  continue;
 }
 
-// VIP
+// básico (com autoplay)
+if(i <= 2){
+  html += `
+  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+    <video 
+      src="${videos[i]}" 
+      muted 
+      playsinline 
+      autoplay 
+      loop
+    ></video>
+    <div class="video-blur"></div>
+    <div class="overlay">🔒 Básico</div>
+  </div>
+  `;
+}
+
+// VIP (SEM autoplay)
 else if(i <= 4){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
     <video 
-  src="${videos[i]}" 
-  muted 
-  playsinline 
-  autoplay 
-  loop
-></video>
+      src="${videos[i]}" 
+      muted 
+      playsinline 
+      preload="metadata"
+    ></video>
     <div class="video-blur"></div>
     <div class="overlay">🔒 🔥 VIP</div>
   </div>
   `;
 }
 
-// Elite
+// Elite (SEM autoplay)
 else{
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
     <video 
-  src="${videos[i]}" 
-  muted 
-  playsinline 
-  autoplay 
-  loop
-></video>
+      src="${videos[i]}" 
+      muted 
+      playsinline 
+      preload="metadata"
+    ></video>
     <div class="video-blur"></div>
     <div class="overlay">🔒 💎 Elite</div>
   </div>
   `;
-  }
+   }
   }
   container.innerHTML = html;
 
