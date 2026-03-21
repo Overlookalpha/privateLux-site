@@ -667,13 +667,17 @@ function clicouBloqueado(el){
 
   document.getElementById("popupVIP").style.display = "flex";
 }
-  function comprarNivel(){
+ function comprarNivel(){
 
-  localStorage.setItem("vip_nivel", nivelSelecionado);
+  let links = {
+    basico: "https://buy.stripe.com/test_eVq3cxgF84z8aRUaIV09ws09",
+    vip: "https://buy.stripe.com/test_eVqaEZ20i0iSe462pi9ws08",
+    elite: "https://buy.stripe.com/test_7sYbJ360ughQ7FI1le9ws0a"
+  };
 
-  alert("Acesso liberado 🔥");
+  let link = links[nivelSelecionado];
 
-  location.reload();
+  window.location.href = link;
 }
  function fecharPopup(){
   document.getElementById("popupVIP").style.display = "none";
@@ -789,6 +793,11 @@ function trocarVideo(el){
 // carregar ao abrir
 window.onload = function(){
   gerarVideos();
+}
+  let params = new URLSearchParams(window.location.search);
+
+if(params.get("vip") === "true"){
+  localStorage.setItem("vip_nivel", "vip");
 }
 </script>
 <script>
