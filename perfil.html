@@ -448,28 +448,31 @@ Reservar
 </div>
 <script>
 
-fotosGaleria = document.querySelectorAll(".galeria img");
+fotosGaleria = document.querySelectorAll(".galeria .foto-container:not(.bloqueada) img");
 fotoAtual = 0;
 
 function trocarFoto(img){
 
-let lightbox = document.getElementById("lightbox");
-let fotoZoom = document.getElementById("fotoZoom");
-let fotoGrande = document.getElementById("fotoGrande");
+  // ❌ se for bloqueada, não abre
+  if(img.closest(".bloqueada")){
+    return;
+  }
 
-fotoZoom.src = img.src;
-fotoGrande.src = img.src;
+  let lightbox = document.getElementById("lightbox");
+  let fotoZoom = document.getElementById("fotoZoom");
+  let fotoGrande = document.getElementById("fotoGrande");
 
-fotosGaleria.forEach((foto,index)=>{
-if(foto.src === img.src){
-fotoAtual = index;
+  fotoZoom.src = img.src;
+  fotoGrande.src = img.src;
+
+  fotosGaleria.forEach((foto,index)=>{
+    if(foto.src === img.src){
+      fotoAtual = index;
+    }
+  });
+
+  lightbox.style.display = "flex";
 }
-});
-
-lightbox.style.display = "flex";
-
-}
-
 function fecharFoto(){
 document.getElementById("lightbox").style.display = "none";
 }
