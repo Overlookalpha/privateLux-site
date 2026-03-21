@@ -307,6 +307,27 @@ font-weight:bold;
   margin-bottom:15px;
   aspect-ratio:16/9;
 }
+  .video-item{
+  position: relative;
+  overflow: hidden;
+}
+
+.video-item video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* camada de blur fake */
+.video-blur{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.4);
+}
 </style>
 </head>
 
@@ -566,34 +587,36 @@ alert("Seu plano não permite acessar este conteúdo.");
     // básico
     if(i <= 2){
       html += `
-      <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-        <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
-        <div class="overlay">🔒 Básico</div>
-      </div>
-      `;
-    }
+     <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+  <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
+  <div class="video-blur"></div>
+  <div class="overlay">🔒 Básico</div>
+</div>
+`;
+}
 
-    // VIP
-    else if(i <= 4){
-      html += `
-      <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-        <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
-        <div class="overlay">🔒 🔥 VIP</div>
-      </div>
-      `;
-    }
+// VIP
+else if(i <= 4){
+  html += `
+  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
+    <div class="video-blur"></div>
+    <div class="overlay">🔒 🔥 VIP</div>
+  </div>
+  `;
+}
 
-    // Elite
-    else{
-      html += `
-      <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-        <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
-        <div class="overlay">🔒 💎 Elite</div>
-      </div>
-      `;
-    }
+// Elite
+else{
+  html += `
+  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
+    <div class="video-blur"></div>
+    <div class="overlay">🔒 💎 Elite</div>
+  </div>
+  `;
   }
-
+  }
   container.innerHTML = html;
 
   let vids = document.querySelectorAll(".video-item video");
