@@ -541,75 +541,81 @@ alert("Seu plano não permite acessar este conteúdo.");
   function clicouBloqueado(el){
   alert("FUNCIONOU!");
 }
-  function gerarVideos(){
+ function gerarVideos(){
 
   let container = document.querySelector(".galeria-videos");
 
- let videos = [
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-];
+  let videos = [
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  ];
 
   let html = "";
 
   for(let i = 0; i < videos.length; i++){
 
     // primeiro livre
-   if(i === 0){
-  continue;
-}
+    if(i === 0){
+      continue;
+    }
 
-    // resto bloqueado
-   // básico
-// básico
-if(i <= 2){
-  html += `
-  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
-    <div class="overlay">🔒 Básico</div>
-  </div>
-  `;
-}
+    // básico
+    if(i <= 2){
+      html += `
+      <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+        <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
+        <div class="overlay">🔒 Básico</div>
+      </div>
+      `;
+    }
 
-// VIP
-else if(i <= 4){
-  html += `
-  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
-    <div class="overlay">🔒 🔥 VIP</div>
-  </div>
-  `;
-}
+    // VIP
+    else if(i <= 4){
+      html += `
+      <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+        <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
+        <div class="overlay">🔒 🔥 VIP</div>
+      </div>
+      `;
+    }
 
-// Elite
-else{
-  html += `
-  <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
-    <div class="overlay">🔒 💎 Elite</div>
-  </div>
-  `;
-}
-}
+    // Elite
+    else{
+      html += `
+      <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
+        <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
+        <div class="overlay">🔒 💎 Elite</div>
+      </div>
+      `;
+    }
+  }
+
   container.innerHTML = html;
-let vids = document.querySelectorAll(".video-item video");
 
-vids.forEach(v => {
-  v.addEventListener("loadeddata", () => {
-  v.currentTime = 1;
-});
+  let vids = document.querySelectorAll(".video-item video");
+
+  vids.forEach(v => {
+    v.addEventListener("loadeddata", () => {
+      v.currentTime = 1;
+    });
+  });
+
   // já coloca o primeiro no vídeo principal
   document.getElementById("videoPrincipal").src = videos[0];
 }
-  function trocarVideo(el){
+
+// função trocar vídeo
+function trocarVideo(el){
   let video = el.querySelector("video").src;
   document.getElementById("videoPrincipal").src = video;
 }
-  window.onload = function(){
+
+// carregar ao abrir
+window.onload = function(){
   gerarVideos();
 }
 </script>
