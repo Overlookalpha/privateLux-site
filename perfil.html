@@ -734,7 +734,7 @@ let precosPerfil = {
 };
 let galeria = document.querySelector(".galeria");
 function gerarGaleria(){
-
+let vip = localStorage.getItem("vip_nivel");
   let html = "";
 
   // 🔥 FOTOS FIXAS (NÃO MUDA MAIS)
@@ -765,7 +765,7 @@ function gerarGaleria(){
     }
 
     // 🔒 BÁSICO (4–6)
-    else if(i <= 6){
+    else if(i <= 6 && !vip){
       html += `
       <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
         <img src="${fotos[i-1]}">
@@ -775,7 +775,7 @@ function gerarGaleria(){
     }
 
     // 🔥 VIP (7–9)
-    else if(i <= 9){
+    else if(i <= 9 && vip !== "vip" && vip !== "elite"){
       html += `
       <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
         <img src="${fotos[i-1]}">
@@ -785,7 +785,7 @@ function gerarGaleria(){
     }
 
     // 💎 ELITE (10–12)
-    else{
+    else if(vip !== "elite"){
       html += `
       <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
         <img src="${fotos[i-1]}">
