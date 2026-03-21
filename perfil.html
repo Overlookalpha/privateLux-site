@@ -596,7 +596,11 @@ else{
   }
   }
   container.innerHTML = html;
+let vids = document.querySelectorAll(".video-item video");
 
+vids.forEach(v => {
+  v.currentTime = 1;
+});
   // já coloca o primeiro no vídeo principal
   document.getElementById("videoPrincipal").src = videos[0];
 }
