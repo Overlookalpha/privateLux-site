@@ -580,11 +580,11 @@ alert("Seu plano não permite acessar este conteúdo.");
   for(let i = 0; i < videos.length; i++){
 
     // primeiro livre
-    if(i === 0){
+   if(i === 0){
   continue;
 }
 
-// básico (com autoplay)
+// básico
 if(i <= 2){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
@@ -601,7 +601,7 @@ if(i <= 2){
   `;
 }
 
-// VIP (SEM autoplay)
+// VIP
 else if(i <= 4){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
@@ -609,7 +609,8 @@ else if(i <= 4){
       src="${videos[i]}" 
       muted 
       playsinline 
-      preload="metadata"
+      autoplay 
+      loop
     ></video>
     <div class="video-blur"></div>
     <div class="overlay">🔒 🔥 VIP</div>
@@ -617,7 +618,7 @@ else if(i <= 4){
   `;
 }
 
-// Elite (SEM autoplay)
+// Elite
 else{
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
@@ -625,14 +626,15 @@ else{
       src="${videos[i]}" 
       muted 
       playsinline 
-      preload="metadata"
+      autoplay 
+      loop
     ></video>
     <div class="video-blur"></div>
     <div class="overlay">🔒 💎 Elite</div>
   </div>
   `;
    }
-  }
+}
   container.innerHTML = html;
 
   let vids = document.querySelectorAll(".video-item video");
