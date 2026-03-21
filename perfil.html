@@ -470,7 +470,7 @@ max-width:300px;
 
 <p id="textoPreco">Preço aqui</p>
 
-<button class="botao">
+<button class="botao" onclick="comprarNivel()">
 Desbloquear 🔥
 </button>
 
@@ -593,7 +593,17 @@ function clicouBloqueado(el){
 
   document.getElementById("popupVIP").style.display = "flex";
 }
- 
+  function comprarNivel(){
+
+  localStorage.setItem("vip_nivel", nivelSelecionado);
+
+  alert("Acesso liberado 🔥");
+
+  location.reload();
+}
+ function fecharPopup(){
+  document.getElementById("popupVIP").style.display = "none";
+}
  function gerarVideos(){
 
   let container = document.querySelector(".galeria-videos");
