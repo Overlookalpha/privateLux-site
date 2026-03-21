@@ -670,8 +670,8 @@ function clicouBloqueado(el){
  function comprarNivel(){
 
   let links = {
-    basico: "https://buy.stripe.com/test_eVq3cxgF84z8aRUaIV09ws09",
-    vip: "https://buy.stripe.com/test_eVqaEZ20i0iSe462pi9ws08",
+    basico: "https://buy.stripe.com/test_eVq3cxgF84z8aRUaVO9ws09",
+    vip: "https://buy.stripe.com/test_eVqaEZ2Oi0iSe462pi9ws08",
     elite: "https://buy.stripe.com/test_7sYbJ360ughQ7FI1le9ws0a"
   };
 
@@ -794,10 +794,12 @@ function trocarVideo(el){
 window.onload = function(){
   gerarVideos();
 }
-  let params = new URLSearchParams(window.location.search);
+ let params = new URLSearchParams(window.location.search);
 
-if(params.get("vip") === "true"){
-  localStorage.setItem("vip_nivel", "vip");
+let nivel = params.get("nivel");
+
+if(nivel){
+  localStorage.setItem("vip_nivel", nivel);
 }
 </script>
 <script>
