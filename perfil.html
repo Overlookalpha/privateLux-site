@@ -569,7 +569,7 @@ alert("Seu plano não permite acessar este conteúdo.");
 if(i <= 2){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}" muted playsinline preload="metadata"></video>
+    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
     <div class="overlay">🔒 Básico</div>
   </div>
   `;
@@ -579,7 +579,7 @@ if(i <= 2){
 else if(i <= 4){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}" muted playsinline preload="metadata"></video>
+    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
     <div class="overlay">🔒 🔥 VIP</div>
   </div>
   `;
@@ -589,7 +589,7 @@ else if(i <= 4){
 else{
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}" muted playsinline preload="metadata"></video>
+    <video src="${videos[i]}" muted playsinline preload="metadata" onerror="this.style.display='none'"></video>
     <div class="overlay">🔒 💎 Elite</div>
   </div>
   `;
