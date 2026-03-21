@@ -392,7 +392,30 @@ font-weight:bold;
 <h3>Vídeos</h3>
 
 <!-- vídeo principal -->
-<video id="videoPrincipal" width="100%" controls>
+<div id="videoContainer" style="position:relative; cursor:pointer;" onclick="ativarVideo()">
+
+  <img id="thumbVideo" src="https://picsum.photos/800/450" 
+       style="width:100%; border-radius:12px;">
+
+  <div id="botaoPlay" style="
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:50px;
+    color:white;
+    background:rgba(0,0,0,0.6);
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  ">
+    ▶
+  </div>
+
+</div>
 </video>
 
 <!-- galeria de vídeos -->
@@ -569,6 +592,16 @@ let novaFoto = fotosGaleria[fotoAtual].src;
 document.getElementById("fotoZoom").src = novaFoto;
 document.getElementById("fotoGrande").src = novaFoto;
 
+}
+function ativarVideo(){
+
+  let container = document.getElementById("videoContainer");
+
+  container.innerHTML = `
+    <video id="videoPrincipal" width="100%" controls autoplay>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+  `;
 }
 function irReserva(){
 
