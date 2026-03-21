@@ -565,6 +565,7 @@ alert("Seu plano não permite acessar este conteúdo.");
 
     // resto bloqueado
    // básico
+// básico
 if(i <= 2){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
@@ -578,7 +579,7 @@ if(i <= 2){
 else if(i <= 4){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}"></video>
+    <video src="${videos[i]}" muted playsinline preload="metadata"></video>
     <div class="overlay">🔒 🔥 VIP</div>
   </div>
   `;
@@ -588,17 +589,17 @@ else if(i <= 4){
 else{
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}"></video>
+    <video src="${videos[i]}" muted playsinline preload="metadata"></video>
     <div class="overlay">🔒 💎 Elite</div>
   </div>
   `;
-
-  }
-  }
+ }
+}
   container.innerHTML = html;
 let vids = document.querySelectorAll(".video-item video");
 
 vids.forEach(v => {
+  v.addEventListener("loadeddata", () => {
   v.currentTime = 1;
 });
   // já coloca o primeiro no vídeo principal
