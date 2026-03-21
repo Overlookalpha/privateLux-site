@@ -559,13 +559,9 @@ alert("Seu plano não permite acessar este conteúdo.");
   for(let i = 0; i < videos.length; i++){
 
     // primeiro livre
-    if(i === 0){
-      html += `
-      <div class="video-item" onclick="trocarVideo(this)">
-        <video src="${videos[i]}"></video>
-      </div>
-      `;
-    }
+   if(i === 0){
+  continue;
+}
 
     // resto bloqueado
    // básico
