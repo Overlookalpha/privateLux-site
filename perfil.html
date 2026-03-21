@@ -559,9 +559,7 @@ if(nivel === "elite" && vip === "elite"){
 // se não tiver acesso
 alert("Seu plano não permite acessar este conteúdo.");
 }
-  function clicouBloqueado(el){
-  alert("FUNCIONOU!");
-}
+ 
  function gerarVideos(){
 
   let container = document.querySelector(".galeria-videos");
@@ -732,6 +730,8 @@ if(perfil == "maria"){
   galeria.innerHTML = `
     ${gerarGaleria()}
   `;
+  fotosGaleria = document.querySelectorAll(".galeria img");
+  fotoAtual = 0;
 }
 
 if(perfil == "julia"){
@@ -743,6 +743,8 @@ if(perfil == "julia"){
   galeria.innerHTML = `
     ${gerarGaleria()}
   `;
+fotosGaleria = document.querySelectorAll(".galeria img");
+fotoAtual = 0;
 }
 
 if(perfil == "ana"){
@@ -754,6 +756,8 @@ if(perfil == "ana"){
   galeria.innerHTML = `
     ${gerarGaleria()}
   `;
+fotosGaleria = document.querySelectorAll(".galeria img");
+fotoAtual = 0;
 }
 </script>
 </body>
