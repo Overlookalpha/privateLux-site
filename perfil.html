@@ -733,11 +733,13 @@ let precosPerfil = {
   }
 };
 let galeria = document.querySelector(".galeria");
+
 function gerarGaleria(){
-let vip = localStorage.getItem("vip_nivel");
+
+  let vip = localStorage.getItem("vip_nivel");
   let html = "";
 
-  // 🔥 FOTOS FIXAS (NÃO MUDA MAIS)
+  // 🔥 FOTOS FIXAS
   let fotos = [
     "https://picsum.photos/id/1011/300",
     "https://picsum.photos/id/1012/300",
@@ -755,7 +757,7 @@ let vip = localStorage.getItem("vip_nivel");
 
   for(let i = 1; i <= 12; i++){
 
-    // 🔓 LIVRES
+    // 🔓 LIVRES (1–3)
     if(i <= 3){
       html += `
       <div class="foto-container">
@@ -764,41 +766,70 @@ let vip = localStorage.getItem("vip_nivel");
       `;
     }
 
-    // 🔒 BÁSICO (4–6)
-    else if(i <= 6 && !vip){
-      html += `
-      <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
-        <img src="${fotos[i-1]}">
-        <div class="overlay">🔒 Básico</div>
-      </div>
-      `;
+    // 🔒 / 🔓 BÁSICO (4–6)
+    else if(i <= 6){
+
+      if(vip){ // qualquer VIP libera básico
+        html += `
+        <div class="foto-container">
+          <img src="${fotos[i-1]}" onclick="trocarFoto(this)">
+        </div>
+        `;
+      } else {
+        html += `
+        <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
+          <img src="${fotos[i-1]}">
+          <div class="overlay">🔒 Básico</div>
+        </div>
+        `;
+      }
+
     }
 
     // 🔥 VIP (7–9)
-    else if(i <= 9 && vip !== "vip" && vip !== "elite"){
-      html += `
-      <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
-        <img src="${fotos[i-1]}">
-        <div class="overlay">🔒 🔥 VIP</div>
-      </div>
-      `;
+    else if(i <= 9){
+
+      if(vip === "vip" || vip === "elite"){
+        html += `
+        <div class="foto-container">
+          <img src="${fotos[i-1]}" onclick="trocarFoto(this)">
+        </div>
+        `;
+      } else {
+        html += `
+        <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
+          <img src="${fotos[i-1]}">
+          <div class="overlay">🔒 🔥 VIP</div>
+        </div>
+        `;
+      }
+
     }
 
     // 💎 ELITE (10–12)
-    else if(vip !== "elite"){
-      html += `
-      <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
-        <img src="${fotos[i-1]}">
-        <div class="overlay">🔒 💎 Elite</div>
-      </div>
-      `;
+    else{
+
+      if(vip === "elite"){
+        html += `
+        <div class="foto-container">
+          <img src="${fotos[i-1]}" onclick="trocarFoto(this)">
+        </div>
+        `;
+      } else {
+        html += `
+        <div class="foto-container bloqueada" onclick="clicouBloqueado(this)">
+          <img src="${fotos[i-1]}">
+          <div class="overlay">🔒 💎 Elite</div>
+        </div>
+        `;
+      }
+
     }
 
   }
 
   return html;
 }
-
 
 // ================= PERFIS =================
 
