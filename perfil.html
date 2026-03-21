@@ -568,7 +568,7 @@ alert("Seu plano não permite acessar este conteúdo.");
 if(i <= 2){
   html += `
   <div class="video-item video-bloqueado" onclick="clicouBloqueado(this)">
-    <video src="${videos[i]}"></video>
+    <video src="${videos[i]}" muted playsinline preload="metadata"></video>
     <div class="overlay">🔒 Básico</div>
   </div>
   `;
