@@ -667,9 +667,10 @@ function clicouBloqueado(el){
 
   document.getElementById("popupVIP").style.display = "flex";
 }
- function comprarNivel(){
+  let nivelSelecionado = "";
+function comprarNivel(){
 
-  console.log("NÍVEL:", nivelSelecionado);
+  localStorage.setItem("nivelComprado", nivelSelecionado);
 
   let links = {
     basico: "https://buy.stripe.com/test_eVq3cxgF84z8aRUaVO9ws09",
@@ -678,8 +679,6 @@ function clicouBloqueado(el){
   };
 
   let link = links[nivelSelecionado];
-
-  console.log("LINK:", link);
 
   window.location.href = link;
 }
@@ -804,6 +803,12 @@ let nivel = params.get("nivel");
 
 if(nivel){
   localStorage.setItem("vip_nivel", nivel);
+}
+  // detectar retorno do pagamento VIP
+let nivelSalvo = localStorage.getItem("nivelComprado");
+
+if(nivelSalvo){
+  localStorage.setItem("vip_nivel", nivelSalvo);
 }
 </script>
 <script>
