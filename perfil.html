@@ -976,8 +976,8 @@ if(perfil == "ana"){
   document.getElementById("descricaoPerfil").innerText =
   "Sou Ana, elegante e tranquila. Proporciono momentos únicos com calma, respeito e muita conexão.";
 
-  galeria.innerHTML = gerarGaleria();
-
+  document.querySelector(".galeria").innerHTML = gerarGaleria();
+  
   fotosGaleria = document.querySelectorAll(".galeria .foto-container:not(.bloqueada) img");
   fotoAtual = 0;
 }
