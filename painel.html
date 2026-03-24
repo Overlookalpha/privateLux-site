@@ -126,6 +126,42 @@ onAuthStateChanged(auth, (user) => {
     carregarFotos(); // 👈 ADICIONA ESSA LINHA
   }
 });
+async function enviarFoto() {
+  const file = document.getElementById("inputFoto").files[0];
+
+  if (!file) {
+    alert("Escolhe uma imagem primeiro");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "unsigned_upload");
+
+  const res = await fetch("https://api.cloudinary.com/v1_1/ds7ilbhb1/image/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  console.log("URL:", data.secure_url);
+
+  const user = usuarioAtual;
+
+if(user){
+
+  const docRef = doc(db, "acompanhantes", user.uid);
+
+  await setDoc(docRef, {
+    fotos: [{
+      url: data.secure_url,
+      tipo: "basico"
+    }]
+  }, { merge: true });
+
+}
+}
 
 const lista = document.getElementById("listaReservas");
 
@@ -217,44 +253,6 @@ window.salvarPerfil = async function(){
     alert("Erro: " + e.message);
   }
 
-}
-  </script>
-<script>
-  async function enviarFoto() {
-  const file = document.getElementById("inputFoto").files[0];
-
-  if (!file) {
-    alert("Escolhe uma imagem primeiro");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("upload_preset", "unsigned_upload");
-
-  const res = await fetch("https://api.cloudinary.com/v1_1/ds7ilbhb1/image/upload", {
-    method: "POST",
-    body: formData
-  });
-
-  const data = await res.json();
-
-  console.log("URL:", data.secure_url);
-
-  const user = usuarioAtual;
-
-if(user){
-
-  const docRef = doc(db, "acompanhantes", user.uid);
-
-  await setDoc(docRef, {
-    fotos: [{
-      url: data.secure_url,
-      tipo: "basico"
-    }]
-  }, { merge: true });
-
-}
 }
   </script>
 </body>
