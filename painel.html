@@ -218,34 +218,6 @@ window.salvarPerfil = async function(){
   }
 
 }
-async function carregarFotos() {
-  const user = usuarioAtual;
-
-  if (!user) return;
-
-  const docRef = doc(db, "acompanhantes", user.uid);
-  const docSnap = await getDoc(docRef);
-
-  if (!docSnap.exists()) return;
-
-  const dados = docSnap.data();
-
-  const galeria = document.getElementById("galeriaFotos");
-  galeria.innerHTML = "";
-
-  if (!dados.fotos) return;
-
-  dados.fotos.forEach(foto => {
-    const img = document.createElement("img");
-    img.src = foto.url;
-    img.style.width = "100px";
-    img.style.height = "100px";
-    img.style.objectFit = "cover";
-    img.style.borderRadius = "8px";
-
-    galeria.appendChild(img);
-  });
-}
   </script>
 <script>
   async function enviarFoto() {
