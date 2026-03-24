@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login - PrivateLux</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f0f0f;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.box{
+  background:#1a1a1a;
+  padding:30px;
+  border-radius:10px;
+  width:300px;
+  text-align:center;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:5px;
+}
+
+button{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  background:#C9A24A;
+  border:none;
+  cursor:pointer;
+}
+
+.link{
+  margin-top:10px;
+  display:block;
+  color:#aaa;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Área do Anunciante</h2>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="senha" placeholder="Senha">
+
+  <button onclick="fazerLogin()">Entrar</button>
+
+  <span class="link" onclick="criarConta()">
+    Criar conta
+  </span>
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import { 
+  getFirestore, 
+  doc, 
+  setDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// 🔥 CONFIG FIREBASE (COLE OS TEUS DADOS AQUI)
+const firebaseConfig = {
+  apiKey: "AIzaSyD_npgtvRpaEvAdJSsZRTQ-dgDBGefEd0w",
+  authDomain: "privatelux.firebaseapp.com",
+  projectId: "privatelux"
+};
+
+
+// INICIAR FIREBASE
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+// 🔐 LOGIN
+window.fazerLogin = async function(){
+  let email = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+
+  try{
+    await signInWithEmailAndPassword(auth, email, senha);
+    window.location.href = "painel.html";
+  }catch(e){
+    alert("Erro no login");
+  }
+}
+
+
+// 🆕 CRIAR CONTA + SALVAR NO FIRESTORE
+window.criarConta = async function(){
+  let email = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+
+  try{
+    const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+    const user = userCredential.user;
+
+    // 🔥 CRIA PERFIL AUTOMÁTICO
+    await setDoc(doc(db, "acompanhantes", user.uid), {
+      nome: "",
+      cidade: "",
+      role: "acompanhante",
+      ativo: true,
+      criadoEm: new Date()
+    });
+
+    alert("Conta criada! Agora complete seu perfil.");
+
+    window.location.href = "painel.html";
+
+  }catch(e){
+    alert("Erro ao criar conta");
+  }
+}
+
+</script>
+
+</body>
+</html>
