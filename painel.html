@@ -89,7 +89,18 @@ Salvar Perfil
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { 
+  getFirestore, 
+  collection, 
+  onSnapshot,
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+import { 
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD_npgtvRpaEvAdJSsZRTQ-dgDBGefEd0w",
@@ -102,6 +113,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+let usuarioAtual = null;
+
+onAuthStateChanged(auth, (user) => {
+  if(user){
+    usuarioAtual = user;
+  }
+});
 
 const lista = document.getElementById("listaReservas");
 
@@ -133,8 +152,33 @@ onSnapshot(collection(db, "reservas"), (snapshot) => {
   });
 
 });
-window.salvarPerfil = function(){
-  alert("função funcionando");
+window.salvarPerfil = async function(){
+
+ const user = usuarioAtual;
+
+  if(!user){
+    alert("Você não está logado");
+    return;
+  }
+
+  const nome = document.getElementById("nome").value;
+  const cidade = document.getElementById("cidade").value;
+  const descricao = document.getElementById("descricao").value;
+
+  try{
+
+    await setDoc(doc(db, "acompanhantes", user.uid), {
+      nome: nome,
+      cidade: cidade,
+      descricao: descricao
+    }, { merge: true });
+
+    alert("Perfil salvo com sucesso!");
+
+  }catch(e){
+    alert("Erro: " + e.message);
+  }
+
 }
 </script>
      
