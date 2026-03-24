@@ -74,7 +74,7 @@ button{
 
 <textarea id="descricao" placeholder="Descrição" style="width:100%; padding:10px;"></textarea>
 
-<button onclick="alert('clicou')">
+<button onclick="salvarPerfil()">
 Salvar Perfil
 </button>
 
@@ -133,7 +133,9 @@ onSnapshot(collection(db, "reservas"), (snapshot) => {
   });
 
 });
-
+window.salvarPerfil = function(){
+  alert("função funcionando");
+}
 </script>
      
 </body>
