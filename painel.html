@@ -75,6 +75,7 @@ button{
 <textarea id="descricao" placeholder="Descrição" style="width:100%; padding:10px;"></textarea>
 <input type="file" id="inputFoto">
 <button onclick="()">Enviar Foto</button>
+<div id="galeriaFotos" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;"></div>
 
 <button onclick="salvarPerfil()">
 Salvar Perfil
@@ -121,10 +122,44 @@ let usuarioAtual = null;
 onAuthStateChanged(auth, (user) => {
   if(user){
     usuarioAtual = user;
+    carregarFotos(); // 👈 ADICIONA ESSA LINHA
   }
 });
 
 const lista = document.getElementById("listaReservas");
+import { getDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+async function carregarFotos(){
+  const user = usuarioAtual;
+  if(!user) return;
+
+  const docRef = doc(db, "acompanhantes", user.uid);
+  const docSnap = await getDoc(docRef);
+
+  if(docSnap.exists()){
+    const dados = docSnap.data();
+
+    const galeria = document.getElementById("galeriaFotos");
+    galeria.innerHTML = "";
+
+    if(dados.fotos){
+      dados.fotos.forEach(foto => {
+
+        let div = document.createElement("div");
+        div.style.width = "80px";
+        div.style.height = "80px";
+        div.style.border = "1px solid #444";
+        div.style.borderRadius = "8px";
+        div.style.backgroundImage = `url(${foto.url})`;
+        div.style.backgroundSize = "cover";
+        div.style.backgroundPosition = "center";
+
+        galeria.appendChild(div);
+
+      });
+    }
+  }
+}
 
 onSnapshot(collection(db, "reservas"), (snapshot) => {
 
@@ -208,12 +243,16 @@ window.salvarPerfil = async function(){
   const user = usuarioAtual;
 
 if(user){
-  await setDoc(doc(db, "acompanhantes", user.uid), {
-    foto: data.secure_url
-  }, { merge: true });
-}
 
-alert("Imagem enviada e salva!");
+  const docRef = doc(db, "acompanhantes", user.uid);
+
+  await setDoc(docRef, {
+    fotos: [{
+      url: data.secure_url,
+      tipo: "basico"
+    }]
+  }, { merge: true });
+
 }
   </script>
 </body>
