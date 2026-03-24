@@ -945,60 +945,31 @@ function gerarGaleria(){
 }
 
 // ================= PERFIS =================
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-if(perfil == "maria"){
-  document.getElementById("nomePerfil").innerText = "Maria";
-  document.getElementById("fotoGrande").src = "https://picsum.photos/id/1011/600";
-  document.getElementById("cidadePerfil").innerText = "Lisboa";
-  document.getElementById("descricaoPerfil").innerText =
-  "Sou Maria, uma acompanhante carinhosa e discreta em Lisboa. Atendimento com atenção, conforto e total sigilo.";
+const db = getFirestore();
 
-  galeria.innerHTML = gerarGaleria();
+// pega o ID salvo quando clicou no perfil
+let id = localStorage.getItem("perfilId");
 
-  fotosGaleria = document.querySelectorAll(".galeria .foto-container:not(.bloqueada) img");
-  fotoAtual = 0;
+async function carregarPerfil(){
+
+  const docRef = doc(db, "acompanhantes", id);
+  const docSnap = await getDoc(docRef);
+
+  if(docSnap.exists()){
+    let data = docSnap.data();
+
+    document.getElementById("nomePerfil").innerText = data.nome;
+    document.getElementById("cidadePerfil").innerText = data.cidade;
+    document.getElementById("descricaoPerfil").innerText = data.descricao || "";
+
+  } else {
+    console.log("Perfil não encontrado");
+  }
 }
 
-
-if(perfil == "julia"){
-  document.getElementById("nomePerfil").innerText = "Julia";
-  document.getElementById("fotoGrande").src = "https://picsum.photos/id/1012/600";
-  document.getElementById("cidadePerfil").innerText = "Porto";
-  document.getElementById("descricaoPerfil").innerText =
-  "Sou Julia, adoro momentos intensos e envolventes. Atendimento em Porto com total dedicação e simpatia.";
-
-  galeria.innerHTML = gerarGaleria();
-
-  fotosGaleria = document.querySelectorAll(".galeria .foto-container:not(.bloqueada) img");
-  fotoAtual = 0;
-}
-
-
-if(perfil == "ana"){
-  document.getElementById("nomePerfil").innerText = "Ana";
-  document.getElementById("fotoGrande").src = "https://picsum.photos/id/1013/600";
-  document.getElementById("cidadePerfil").innerText = "Lisboa";
-  document.getElementById("descricaoPerfil").innerText =
-  "Sou Ana, elegante e tranquila. Proporciono momentos únicos com calma, respeito e muita conexão.";
-
-  document.querySelector(".galeria").innerHTML = gerarGaleria();
-  
-  fotosGaleria = document.querySelectorAll(".galeria .foto-container:not(.bloqueada) img");
-  fotoAtual = 0;
-}
-  if(perfil == "anna"){
-
-  document.getElementById("nomePerfil").innerText = "Anna";
-  document.getElementById("fotoGrande").src = "https://picsum.photos/id/1014/600";
-  document.getElementById("cidadePerfil").innerText = "Lisboa";
-  document.getElementById("descricaoPerfil").innerText =
-  "Sou Anna, intensa e envolvente. Proporciono experiências únicas com energia, conexão e total discrição.";
-
-  document.querySelector(".galeria").innerHTML = gerarGaleria();
-
-  fotosGaleria = document.querySelectorAll(".galeria .foto-container:not(.bloqueada) img");
-  fotoAtual = 0;
-}
+carregarPerfil();
 </script>
 <script type="module">
 
