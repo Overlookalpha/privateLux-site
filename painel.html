@@ -74,7 +74,7 @@ button{
 
 <textarea id="descricao" placeholder="Descrição" style="width:100%; padding:10px;"></textarea>
 <input type="file" id="inputFoto">
-<button onclick="enviarFoto()">Enviar Foto</button>
+<button onclick="()">Enviar Foto</button>
 
 <button onclick="salvarPerfil()">
 Salvar Perfil
@@ -205,7 +205,15 @@ window.salvarPerfil = async function(){
 
   console.log("URL:", data.secure_url);
 
-  alert("Imagem enviada com sucesso!");
+  const user = usuarioAtual;
+
+if(user){
+  await setDoc(doc(db, "acompanhantes", user.uid), {
+    foto: data.secure_url
+  }, { merge: true });
+}
+
+alert("Imagem enviada e salva!");
 }
   </script>
 </body>
