@@ -73,6 +73,8 @@ button{
 <input id="cidade" placeholder="Cidade" style="width:100%; padding:10px; margin-bottom:10px;">
 
 <textarea id="descricao" placeholder="Descrição" style="width:100%; padding:10px;"></textarea>
+<input type="file" id="inputFoto">
+<button onclick="enviarFoto()">Enviar Foto</button>
 
 <button onclick="salvarPerfil()">
 Salvar Perfil
@@ -180,7 +182,31 @@ window.salvarPerfil = async function(){
   }
 
 }
+  </script>
 </script>
-     
+  async function enviarFoto() {
+  const file = document.getElementById("inputFoto").files[0];
+
+  if (!file) {
+    alert("Escolhe uma imagem primeiro");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "unsigned_upload");
+
+  const res = await fetch("https://api.cloudinary.com/v1_1/ds7ilbhb1/image/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  console.log("URL:", data.secure_url);
+
+  alert("Imagem enviada com sucesso!");
+}
+  </script>
 </body>
 </html>
