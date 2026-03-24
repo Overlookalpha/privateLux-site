@@ -1000,5 +1000,44 @@ if(perfil == "ana"){
   fotoAtual = 0;
 }
 </script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD_npgtvRpaEvAdJSsZRTQ-dgDBGefEd0w",
+  authDomain: "privatelux.firebaseapp.com",
+  projectId: "privatelux",
+  storageBucket: "privatelux.firebasestorage.app",
+  messagingSenderId: "54727056404",
+  appId: "1:54727056404:web:d475eab8632633f8c8db01"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// PEGAR ID DO PERFIL
+const id = localStorage.getItem("perfilSelecionado");
+
+// BUSCAR NO FIREBASE
+const docRef = doc(db, "acompanhantes", id);
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+
+  let a = docSnap.data();
+
+  // PREENCHER TELA
+  document.getElementById("nomePerfil").innerText = a.nome || "Sem nome";
+  document.getElementById("cidadePerfil").innerText = a.cidade || "-";
+  document.getElementById("descricaoPerfil").innerText = a.descricao || "Sem descrição";
+
+  // FOTO (placeholder por enquanto)
+  document.getElementById("fotoGrande").src = "https://picsum.photos/600/400";
+
+}
+
+</script>
 </body>
 </html>
