@@ -1008,7 +1008,14 @@ if(docSnap.exists()){
   document.getElementById("fotoGrande").src = "https://picsum.photos/600/400";
 
 }
+const urlParams = new URLSearchParams(window.location.search);
+const modo = urlParams.get("modo");
 
+let modoEdicao = modo === "edit";
+
+if(modoEdicao){
+  console.log("MODO EDIÇÃO ATIVO");
+}
 </script>
 </body>
 </html>
